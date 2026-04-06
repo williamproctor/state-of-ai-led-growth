@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State of AI-Led Growth: Internal Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f5c518;
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --bg-card: #161616;
+      --border: #222222;
+      --muted: #888888;
+      --text: #ffffff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.96);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-meta { font-size: 13px; color: var(--muted); }
+    .nav-tag {
+      font-size: 12px;
+      font-weight: 600;
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 100px;
+      color: var(--muted);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    .container.tight { padding-top: 56px; padding-bottom: 56px; }
+    .section-alt { background: var(--bg-alt); }
+    hr.divider { border: none; border-top: 1px solid var(--border); }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 96px 48px 72px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #161616;
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .meta-value { font-size: 14px; font-weight: 600; }
+
+    /* SECTION LABELS */
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    /* HEADINGS */
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    p { color: #cccccc; line-height: 1.7; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* STAT CARDS */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .stat-desc { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* TWO COL */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+    /* REASONS */
+    .reasons { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    .reason {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .reason-num { font-size: 13px; font-weight: 700; color: var(--gold); min-width: 22px; padding-top: 2px; }
+    .reason h3 { font-size: 15px; margin-bottom: 4px; }
+    .reason p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* CHANNELS */
+    .channels { margin-top: 32px; }
+    .channel {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .channel:last-child { border-bottom: none; }
+    .ch-num {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .ch-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: rgba(245,197,24,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.2);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+    .ch-body h3 { font-size: 15px; margin-bottom: 4px; }
+    .ch-body p { font-size: 14px; color: var(--muted); margin: 0; }
+
+    /* BENCHMARKS */
+    .benchmarks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .benchmark {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .bm-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .bm-label { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .bm-sub { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* TIMELINE */
+    .timeline { margin-top: 32px; }
+    .tl-item {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-date {
+      min-width: 130px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      padding-top: 2px;
+    }
+    .tl-content h3 { font-size: 15px; margin-bottom: 2px; }
+    .tl-content p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* BAR CHART */
+    .gap-chart {
+      margin-top: 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+    }
+    .chart-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .chart-rows { display: flex; flex-direction: column; gap: 10px; }
+    .chart-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+    .chart-group-label.gap {
+      color: var(--gold);
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .chart-row { display: flex; align-items: center; gap: 14px; }
+    .chart-label {
+      font-size: 12px;
+      color: #999999;
+      width: 300px;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .chart-bar-wrap { flex: 1; display: flex; align-items: center; gap: 10px; }
+    .chart-bar { height: 26px; border-radius: 4px; min-width: 2px; }
+    .chart-bar.high { background: #2c2c2c; border: 1px solid #383838; }
+    .chart-bar.low { background: rgba(245,197,24,0.18); border: 1px solid rgba(245,197,24,0.35); }
+    .chart-pct { font-size: 13px; font-weight: 700; color: var(--muted); min-width: 36px; }
+    .chart-pct.gold { color: var(--gold); }
+    @media (max-width: 768px) {
+      .chart-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .chart-label { width: 100%; }
+      .chart-bar-wrap { width: 100%; }
+    }
+
+    /* MATRIX */
+    .matrix-wrap { margin-top: 32px; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+    .matrix { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .matrix thead th {
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      background: var(--bg-card);
+    }
+    .matrix thead th:first-child { text-align: left; }
+    .matrix tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      vertical-align: middle;
+      background: var(--bg);
+    }
+    .matrix tbody td:first-child { text-align: left; }
+    .matrix tbody tr:last-child td { border-bottom: none; }
+    .report-name { font-size: 13px; font-weight: 600; color: #888888; }
+    .ours-row td { background: rgba(245,197,24,0.04) !important; }
+    .ours-row .report-name { color: var(--gold); font-weight: 700; }
+    .mc { color: var(--gold); font-size: 15px; font-weight: 800; }
+    .mx { color: #2e2e2e; font-size: 15px; font-weight: 800; }
+
+    /* LANDSCAPE */
+    .landscape-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .ls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ls-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .ls-section { display: flex; flex-direction: column; gap: 6px; }
+    .ls-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+    .ls-tag.good {
+      background: rgba(255,255,255,0.05);
+      color: #aaaaaa;
+      border: 1px solid #333;
+    }
+    .ls-tag.gap {
+      background: rgba(245,197,24,0.08);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.2);
+    }
+    .ls-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.55; }
+    .ls-ours {
+      margin-top: 14px;
+      background: rgba(245,197,24,0.05);
+      border: 1px solid rgba(245,197,24,0.25);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .ls-ours-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .ls-ours h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .ls-ours p { font-size: 14px; color: #bbbbbb; margin-bottom: 16px; line-height: 1.65; }
+    .ls-ours-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ls-pill {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.25);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* HOW WE USE IT */
+    .use-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .use-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .use-icon {
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .use-block h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+    .use-block ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .use-block ul li {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .use-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 11px;
+      top: 1px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero, .container { padding-left: 20px; padding-right: 20px; }
+      .grid-3, .grid-2, .benchmarks, .use-grid, .landscape-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">State of AI-Led Growth</span>
+  <span class="nav-meta">Internal Brief · March 2026</span>
+  <span class="nav-tag">GrowthX Team Only</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="eyebrow">Confidential · Internal Use Only</span>
+  <h1>The <em>State of</em><br>AI-Led Growth.</h1>
+  <p class="hero-sub">What it is, why we're doing it, and what success looks like. A brief for the GrowthX team before we launch in April.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Launch</span>
+      <span class="meta-value">April 30, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Survey closes</span>
+      <span class="meta-value">May 30, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Report publishes</span>
+      <span class="meta-value">June 1, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Audience</span>
+      <span class="meta-value">7,100+ subscribers</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Survey target</span>
+      <span class="meta-value">500 responses</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- THE OPPORTUNITY -->
+<div class="container">
+  <div class="label">The Opportunity</div>
+  <h2>The gap nobody is measuring.</h2>
+  <p>AI adoption in GTM is near-universal. AI visibility strategy is almost nonexistent. Most growth teams have figured out how to use AI to produce faster. Almost none have figured out how to make sure AI recommends them.</p>
+  <p>92% of marketing teams now consider AI visibility a priority. Only 23% feel confident in their approach. That 69-point gap is the story. Nobody has independent, practitioner-sourced data on it yet.</p>
+  <p>We have the audience, the credibility, and the thesis to own this. HubSpot's investment in GrowthX validates the commercial case. Our editorial data validates the audience demand. AEO issues consistently outperform everything else we publish by 10+ percentage points in open rate.</p>
+  <div class="grid-3">
+    <div class="stat-card">
+      <div class="stat-num">47%</div>
+      <p class="stat-desc">of enterprise buyers now start vendor research with AI, ahead of Google Search for the first time</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4–5x</div>
+      <p class="stat-desc">higher conversion rate from AI traffic vs. Google organic (14.2% vs. 2.8%)</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">93%</div>
+      <p class="stat-desc">of buyers use AI to compare and summarize vendors once they're in evaluation mode</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">92%</div>
+      <p class="stat-desc">of marketers consider AI visibility a priority. Only 23% feel confident in their approach.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">81%</div>
+      <p class="stat-desc">of marketers have no measurement framework for AI performance at all</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">0</div>
+      <p class="stat-desc">independent practitioner surveys on AI visibility in GTM currently exist</p>
+    </div>
+  </div>
+
+  <div class="gap-chart">
+    <div class="chart-title">The adoption vs. visibility gap</div>
+    <div class="chart-rows">
+      <div class="chart-group-label">Adoption is high</div>
+      <div class="chart-row">
+        <span class="chart-label">Marketing teams actively using AI tools</span>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar high" style="width:91%"></div>
+          <span class="chart-pct">91%</span>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="chart-label">Marketers who consider AI visibility a priority</span>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar high" style="width:92%"></div>
+          <span class="chart-pct">92%</span>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="chart-label">Enterprise buyers who now start research with AI</span>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar high" style="width:47%"></div>
+          <span class="chart-pct">47%</span>
+        </div>
+      </div>
+      <div class="chart-group-label gap">Action is low</div>
+      <div class="chart-row">
+        <span class="chart-label">Marketers confident in their AI visibility approach</span>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar low" style="width:23%"></div>
+          <span class="chart-pct gold">23%</span>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="chart-label">Marketers with any AI measurement framework</span>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar low" style="width:19%"></div>
+          <span class="chart-pct gold">19%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT IT IS -->
+<div class="section-alt">
+  <div class="container">
+    <div class="label">The Project</div>
+    <h2>What it is.</h2>
+    <p>A 19-question survey for GTM operators, growth leads, founders, and marketing ops professionals. Five minutes to complete. The result: the first practitioner-sourced benchmark on AI-led growth, published May 2026.</p>
+    <p>The thesis is simple: <strong style="color:#fff;">AI adoption is high. AI visibility is not.</strong> The survey proves that gap with real data from 500 real practitioners, segmented by role and company stage so every finding is actually useful to the reader.</p>
+    <p>The gate is an email address. Every person who downloads the report and isn't already on our list becomes a subscriber.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>The survey</h3>
+        <p>19 questions across 5 categories: Adoption, Use Cases and Tools, Results and Tensions, AI Visibility, and Future Intent. Designed to prove the gap, not just describe it.</p>
+      </div>
+      <div class="card">
+        <h3>The report</h3>
+        <p>A free benchmark report gated behind email. Fuels 3–4 newsletter issues, a LinkedIn data series, a live workshop, and sales collateral for CheckThat conversations through the rest of 2026.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- LANDSCAPE -->
+<div class="container tight">
+  <div class="label">The Existing Landscape</div>
+  <h2>What's already out there, and what's missing.</h2>
+  <p>Several reports cover AI in marketing. None of them cover this from the right angle. Here's what each gets right and where each one falls short.</p>
+
+  <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Report</th>
+          <th>Vendor-free</th>
+          <th>GTM-specific</th>
+          <th>500+ respondents</th>
+          <th>AI visibility focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="report-name">HubSpot State of Marketing 2026</td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mx">✗</span></td>
+        </tr>
+        <tr>
+          <td class="report-name">Jasper State of AI in Marketing 2026</td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mx">✗</span></td>
+        </tr>
+        <tr>
+          <td class="report-name">RevSure: Agentic AI in B2B GTM 2026</td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mx">✗</span></td>
+        </tr>
+        <tr>
+          <td class="report-name">Growth Unhinged: AI for B2B GTM 2026</td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mx">✗</span></td>
+          <td><span class="mx">✗</span></td>
+        </tr>
+        <tr class="ours-row">
+          <td class="report-name">GrowthX: State of AI-Led Growth 2026</td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mc">✓</span></td>
+          <td><span class="mc">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ls-ours">
+    <div class="ls-ours-label">Where we fit</div>
+    <h3>The GrowthX State of AI-Led Growth</h3>
+    <p>Independent. GTM-specific. Practitioner-surveyed. And the only report with AI visibility (AEO, brand presence across ChatGPT, Perplexity, Gemini) as its central thesis. Every other report either doesn't ask the question or gets the data from a vendor with a product to sell. We get it from 500 operators with no agenda.</p>
+    <div class="ls-ours-tags">
+      <span class="ls-pill">Independent</span>
+      <span class="ls-pill">GTM-specific</span>
+      <span class="ls-pill">500 practitioners</span>
+      <span class="ls-pill">AI visibility focus</span>
+      <span class="ls-pill">No vendor bias</span>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- WHY THIS WORKS -->
+<div class="container">
+  <div class="label">Why This Works for GrowthX</div>
+  <h2>Six reasons this is worth doing.</h2>
+  <div class="reasons">
+    <div class="reason">
+      <span class="reason-num">01</span>
+      <div>
+        <h3>Proprietary data we own permanently</h3>
+        <p>Every future newsletter, post, and sales conversation can cite original GrowthX research. That's a compounding asset, not a one-time deliverable.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">02</span>
+      <div>
+        <h3>Net new subscribers at zero ad spend</h3>
+        <p>The report is gated behind email. Every respondent who isn't already on the list becomes a subscriber. The survey does the list-building work.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">03</span>
+      <div>
+        <h3>Content fuel for 6+ months</h3>
+        <p>One survey becomes 3–4 newsletter issues, a LinkedIn data series, workshop curriculum, and sales collateral. The data shapes the content calendar, not the other way around.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">04</span>
+      <div>
+        <h3>Sales intelligence for CheckThat</h3>
+        <p>We know exactly which companies said "we know we should track AI visibility but haven't started." That's a warm, data-backed outreach trigger, not cold prospecting.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">05</span>
+      <div>
+        <h3>Relationship building at scale</h3>
+        <p>Interesting respondents get direct outreach: "Your answer caught our attention. Would you be up for a conversation?" The survey is a relationship engine dressed as a research project.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">06</span>
+      <div>
+        <h3>LLM citation asset for GrowthX itself</h3>
+        <p>The report lives publicly and gets cited in AI search. It builds GrowthX's own AI visibility, the first principle of the system we teach.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- HOW WE USE IT -->
+<div class="container tight">
+  <div class="label">After the Survey Closes</div>
+  <h2>How we use the data.</h2>
+  <p>The survey runs for 30 days. Here's exactly what happens with the responses after it closes.</p>
+
+  <div class="use-grid">
+
+    <div class="use-block">
+      <div class="use-icon">✦</div>
+      <h3>Content fuel</h3>
+      <ul>
+        <li>3–4 newsletter issues, one major finding each</li>
+        <li>LinkedIn one-stat series running weekly through summer</li>
+        <li>Live workshop in July, where the data becomes the curriculum</li>
+        <li>Shapes the Q3 content calendar based on what the audience says they're struggling with</li>
+      </ul>
+    </div>
+
+    <div class="use-block">
+      <div class="use-icon">✦</div>
+      <h3>Sales intelligence</h3>
+      <ul>
+        <li>Filter respondents who said "we know we should track AI visibility but haven't started" for warm, data-backed outreach</li>
+        <li>Segment by company stage and role for targeted follow-up conversations</li>
+        <li>Use the findings in strategy sessions and client pitches as third-party validation</li>
+      </ul>
+    </div>
+
+    <div class="use-block">
+      <div class="use-icon">✦</div>
+      <h3>Relationship building</h3>
+      <ul>
+        <li>Identify the most interesting respondents by company and role</li>
+        <li>Reach out directly: "Your answer caught our attention. Would you be up for a 20-minute conversation?"</li>
+        <li>Build relationships with people who self-selected as deeply engaged with the topic</li>
+      </ul>
+    </div>
+
+    <div class="use-block">
+      <div class="use-icon">✦</div>
+      <h3>Proprietary research asset</h3>
+      <ul>
+        <li>Report lives publicly at growthx.ai/survey, cited in articles, posts, and AI search responses</li>
+        <li>Builds GrowthX's own AI visibility over time</li>
+        <li>Referenced in future newsletter issues as ongoing benchmark data</li>
+        <li>Reusable in sales decks, workshop decks, and partner conversations indefinitely</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- DISTRIBUTION -->
+<div class="section-alt">
+  <div class="container">
+    <div class="label">Distribution Plan</div>
+    <h2>Three channels. In order.</h2>
+    <p>Each channel feeds into the next. Scarcity from Channel 1 drives urgency in Channels 2 and 3.</p>
+    <div class="channels">
+      <div class="channel">
+        <div class="ch-num">1</div>
+        <div class="ch-body">
+          <span class="ch-tag">Goes first</span>
+          <h3>Marcel's LinkedIn post</h3>
+          <p>Offer: free AEO strategy session with the GrowthX team for anyone who completes the survey. Spots are limited by the team's calendar. When they fill, it signals demand and triggers Channel 2.</p>
+        </div>
+      </div>
+      <div class="channel">
+        <div class="ch-num">2</div>
+        <div class="ch-body">
+          <span class="ch-tag">After sessions fill</span>
+          <h3>GrowthX newsletter (7,100+ subscribers)</h3>
+          <p>Offer: 3 months free paid community access for anyone who completes the survey. The framing: "Strategy sessions went fast. Here's what we're doing for newsletter subscribers." Everyone gets early report access regardless.</p>
+        </div>
+      </div>
+      <div class="channel">
+        <div class="ch-num">3</div>
+        <div class="ch-body">
+          <span class="ch-tag">Ongoing</span>
+          <h3>Circle free members</h3>
+          <p>Offer: 3 months free paid community upgrade, guaranteed for all completers. Free members know exactly what they'd be unlocking: courses, workshops, live sessions, and the full archive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- BENCHMARKS -->
+<div class="container">
+  <div class="label">Benchmarks for Success</div>
+  <h2>What "this worked" looks like.</h2>
+  <div class="benchmarks">
+    <div class="benchmark">
+      <div class="bm-val">750</div>
+      <div class="bm-label">Report downloads</div>
+      <p class="bm-sub">New subscribers who gate their access with an email address</p>
+    </div>
+    <div class="benchmark">
+      <div class="bm-val">500</div>
+      <div class="bm-label">Survey responses</div>
+      <p class="bm-sub">The sample size that gives the report real credibility</p>
+    </div>
+    <div class="benchmark">
+      <div class="bm-val">5</div>
+      <div class="bm-label">Strategy sessions</div>
+      <p class="bm-sub">Booked directly from the LinkedIn distribution play</p>
+    </div>
+    <div class="benchmark">
+      <div class="bm-val">3–4</div>
+      <div class="bm-label">Newsletter issues</div>
+      <p class="bm-sub">One major finding per issue, running June through August 2026</p>
+    </div>
+    <div class="benchmark">
+      <div class="bm-val">1</div>
+      <div class="bm-label">Live workshop</div>
+      <p class="bm-sub">July 2026, where the data becomes the curriculum</p>
+    </div>
+    <div class="benchmark">
+      <div class="bm-val">∞</div>
+      <div class="bm-label">Citation asset</div>
+      <p class="bm-sub">Original research lives permanently and builds GrowthX's own AI visibility</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TIMELINE -->
+<div class="section-alt">
+  <div class="container">
+    <div class="label">Timeline</div>
+    <h2>April to June 2026.</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-date">April 30</span>
+        <div class="tl-content">
+          <h3>Survey goes live</h3>
+          <p>Marcel's LinkedIn post drops first. Strategy sessions open. Newsletter and Circle distribution follows once spots fill.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">May 30</span>
+        <div class="tl-content">
+          <h3>Survey closes</h3>
+          <p>Hard deadline. Data goes into analysis.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">June 1</span>
+        <div class="tl-content">
+          <h3>Full report publishes</h3>
+          <p>Gated PDF and landing page go live. Early access goes out to all respondents. Newsletter series begins.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">June–July 2026</span>
+        <div class="tl-content">
+          <h3>LinkedIn data series</h3>
+          <p>One-stat posts running weekly. Each drives traffic back to the report.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">July 2026</span>
+        <div class="tl-content">
+          <h3>Live workshop</h3>
+          <p>Marcel unpacks the findings with the audience. The data becomes the curriculum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>State of AI-Led Growth &nbsp;·&nbsp; GrowthX Internal Brief &nbsp;·&nbsp; March 2026</p>
+  <p>growthx.ai &nbsp;·&nbsp; Internal use only</p>
+</footer>
+
+</body>
+</html>

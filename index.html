@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State of AI-Led Growth 2026 | GrowthX Survey</title>
+  <meta name="description" content="How are GTM operators actually using AI in 2026? Take the 5-minute survey and get early access to the benchmark report.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f5c518;
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --bg-card: #161616;
+      --border: #222222;
+      --muted: #888888;
+      --text: #ffffff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.96);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .nav-brand {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .nav-by {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-primary {
+      background: var(--gold);
+      color: #000000;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 96px 48px 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #161616;
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero-badge span { color: var(--gold); }
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    h1 em { color: var(--gold); font-style: normal; }
+    .hero-thesis {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .hero-cta-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 18px 20px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* DIVIDER */
+    hr.divider { border: none; border-top: 1px solid var(--border); }
+
+    /* SECTION */
+    .section { padding: 72px 48px; max-width: 920px; margin: 0 auto; }
+    .section.tight { padding-top: 56px; padding-bottom: 56px; }
+    .section-alt { background: var(--bg-alt); }
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    p { color: #cccccc; line-height: 1.7; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* THE GAP */
+    .gap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .gap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .gap-num {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+    .gap-num.gold { color: var(--gold); }
+    .gap-num.dim { color: #2a2a2a; -webkit-text-stroke: 1px #444; }
+    .gap-card h3 { font-size: 14px; margin-bottom: 6px; }
+    .gap-card p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* WHAT YOU GET */
+    .perks { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    .perk {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .perk-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .perk-body h3 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .perk-body p { font-size: 13px; color: var(--muted); margin: 0; }
+    .perk-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: rgba(245,197,24,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.2);
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* WHO IT'S FOR */
+    .personas {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .persona {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .persona-icon { font-size: 24px; margin-bottom: 10px; }
+    .persona h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .persona p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* QUESTION PREVIEW */
+    .q-list { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+    .q-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .q-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      min-width: 110px;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .q-text { font-size: 14px; color: #cccccc; line-height: 1.5; }
+    .q-more {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+    }
+
+    /* ABOUT GROWTHX */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .about-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .about-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .about-label { font-size: 12px; color: var(--muted); }
+
+    /* FINAL CTA */
+    .cta-block {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .cta-block h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 16px; }
+    .cta-block p { color: var(--muted); max-width: 480px; margin: 0 auto 36px; font-size: 15px; }
+    .cta-details {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .cta-detail { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .cta-detail span { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 12px; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 64px 20px 56px; }
+      .section { padding: 56px 20px; }
+      .stats-bar { flex-direction: column; border-radius: 12px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .gap-grid, .about-grid { grid-template-columns: 1fr 1fr; }
+      .personas { grid-template-columns: 1fr 1fr; }
+      .q-item { flex-direction: column; gap: 6px; }
+      .cta-block { padding: 56px 20px; }
+      footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <span class="nav-brand">State of AI-Led Growth</span>
+    <span class="nav-by">by GrowthX</span>
+  </div>
+  <a href="#survey" class="btn btn-primary">Take the Survey</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">2026 Benchmark Report &nbsp;·&nbsp; <span>Free</span></div>
+  <h1>What are GTM operators<br><em>actually doing</em> with AI?</h1>
+  <p class="hero-thesis">AI adoption is high. AI visibility is not. We're surveying 500 GTM operators to find out where the gap really is, and publishing the findings for free.</p>
+  <div class="hero-cta-group">
+    <a href="#survey" class="btn btn-primary">Take the Survey &rarr;</a>
+    <a href="#what-you-get" class="btn btn-outline">What you get</a>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">19</div>
+      <div class="stat-label">questions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5 min</div>
+      <div class="stat-label">to complete</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">500</div>
+      <div class="stat-label">practitioners surveyed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">June 1</div>
+      <div class="stat-label">report publishes</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- THE GAP -->
+<div class="section-alt">
+  <div class="section">
+    <div class="label">Why this matters</div>
+    <h2>AI adoption is high.<br>AI visibility strategy is not.</h2>
+    <p>Most growth teams have figured out how to use AI to produce faster. Almost none have figured out how to make sure AI recommends them. Buyers are already using AI to research and shortlist vendors. The teams showing up in those answers are pulling ahead. The teams who aren't don't know what they're missing.</p>
+    <p>This survey is the first independent, practitioner-sourced benchmark on where GTM teams actually stand.</p>
+    <div class="gap-grid">
+      <div class="gap-card">
+        <div class="gap-num">47%</div>
+        <h3>of enterprise buyers now start vendor research with AI</h3>
+        <p>Ahead of Google Search (43%) for the first time. Your buyers are asking AI who to shortlist.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num gold">93%</div>
+        <h3>of buyers use AI to compare vendors in evaluation</h3>
+        <p>AI visibility affects shortlisting, not just awareness. It's already part of the buying decision.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num">92%</div>
+        <h3>of marketers consider AI visibility a priority</h3>
+        <p>The awareness is there. The strategy is not.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num gold">23%</div>
+        <h3>feel confident in their AI visibility approach</h3>
+        <p>A 69-point gap between knowing it matters and knowing what to do about it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT YOU GET -->
+<div class="section" id="what-you-get">
+  <div class="label">What you get</div>
+  <h2>It takes 5 minutes.<br>Here's what comes back.</h2>
+  <p>Everyone who completes the survey gets early access to the full report when it publishes June 1. Depending on how you find this survey, there may be something extra waiting for you too.</p>
+  <div class="perks">
+    <div class="perk">
+      <div class="perk-icon">📊</div>
+      <div class="perk-body">
+        <h3>Early access to the full report <span class="perk-tag">Everyone</span></h3>
+        <p>The complete State of AI-Led Growth benchmark, published June 1, 2026. See how your team compares to 500 GTM operators at your stage and in your role, before anyone else.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🏆</div>
+      <div class="perk-body">
+        <h3>3 months free community access <span class="perk-tag">Newsletter subscribers</span></h3>
+        <p>If you came here from the GrowthX newsletter, completing the survey enters you into a draw for 3 months free access to the paid community tier. Courses, workshops, live sessions, and the full archive.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">⚡</div>
+      <div class="perk-body">
+        <h3>Free AEO strategy session with the GrowthX team <span class="perk-tag">Limited</span></h3>
+        <p>A limited number of spots are available for a complimentary AEO strategy session. We map your brand's current AI visibility across ChatGPT, Perplexity, Gemini, and Claude, and show you where the gaps are. First come, first served.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHO IT'S FOR -->
+<div class="section-alt">
+  <div class="section tight">
+    <div class="label">Who it's for</div>
+    <h2>Built for the people who own pipeline.</h2>
+    <p>This isn't a survey for "marketers" broadly. It's for the operators and growth leads who are actually running AI in their GTM motion every day.</p>
+    <div class="personas">
+      <div class="persona">
+        <div class="persona-icon">🎯</div>
+        <h3>VP / Director of Marketing</h3>
+        <p>Own pipeline. Accountable for AI ROI. Need the benchmark.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">📈</div>
+        <h3>Head of Growth</h3>
+        <p>Running experiments. Scaling what works. Want to know what peers are doing.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">🚀</div>
+        <h3>Founder / CEO</h3>
+        <p>Doing it yourself at Seed or Series A. Want signal, not fluff.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">⚙️</div>
+        <h3>Marketing Ops / RevOps</h3>
+        <p>Building the stack. Measuring what actually matters.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- QUESTION PREVIEW -->
+<div class="section">
+  <div class="label">A look at the questions</div>
+  <h2>What we're asking.</h2>
+  <p>19 questions across 5 categories. These four give you a sense of where it goes.</p>
+  <div class="q-list">
+    <div class="q-item">
+      <span class="q-cat">Adoption</span>
+      <span class="q-text">How long has your team been actively using AI for marketing or growth work?</span>
+    </div>
+    <div class="q-item">
+      <span class="q-cat">Use Cases</span>
+      <span class="q-text">Which areas is your team actively using AI for? (Content creation, outbound, AI visibility, analytics, and more)</span>
+    </div>
+    <div class="q-item">
+      <span class="q-cat">AI Visibility</span>
+      <span class="q-text">Are you actively tracking whether your brand shows up in AI-generated responses across ChatGPT, Perplexity, Gemini, and Claude?</span>
+    </div>
+    <div class="q-item">
+      <span class="q-cat">Future Intent</span>
+      <span class="q-text">Where are you planning to invest most in AI for GTM in the next 12 months?</span>
+    </div>
+  </div>
+  <div class="q-more">15 more questions covering results, tensions, barriers, and what you wish AI could do for your team.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT GROWTHX -->
+<div class="section-alt">
+  <div class="section tight">
+    <div class="label">About GrowthX</div>
+    <h2>Built by practitioners, for practitioners.</h2>
+    <p>GrowthX runs AI-led growth programs for some of the fastest-growing B2B companies in the world. HubSpot is an investor. This survey is independent research, not a vendor report. No product to sell you. Just the data.</p>
+    <div class="about-grid">
+      <div class="about-stat">
+        <div class="about-num">70+</div>
+        <div class="about-label">B2B clients served</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-num">7,100+</div>
+        <div class="about-label">Newsletter subscribers</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-num">500+</div>
+        <div class="about-label">Paid $300 for the live workshop</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-num">4</div>
+        <div class="about-label">Unicorns built with this system</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINAL CTA -->
+<div class="cta-block" id="survey">
+  <div class="label" style="text-align:center;">Take the survey</div>
+  <h2>Help shape the first practitioner<br>benchmark on AI-led growth.</h2>
+  <p>5 minutes. Free. Your answers shape research that the whole GTM community will use.</p>
+  <a href="#" class="btn btn-primary" style="font-size:16px; padding:14px 32px;">Take the Survey &rarr;</a>
+  <div class="cta-details">
+    <div class="cta-detail"><span>✓</span> 19 questions, 5 minutes</div>
+    <div class="cta-detail"><span>✓</span> Free early report access</div>
+    <div class="cta-detail"><span>✓</span> Survey closes May 30, 2026</div>
+    <div class="cta-detail"><span>✓</span> Report publishes June 1, 2026</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>State of AI-Led Growth 2026 &nbsp;·&nbsp; <a href="https://growthx.ai">GrowthX</a> &nbsp;·&nbsp; growthx.ai/survey</p>
+  <p><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="https://growthx.ai">growthx.ai</a></p>
+</footer>
+
+</body>
+</html>
