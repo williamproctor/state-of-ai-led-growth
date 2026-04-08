@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take the Survey | State of AI-Led Growth 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f5c518;
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --bg-card: #161616;
+      --border: #222222;
+      --muted: #888888;
+      --text: #ffffff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.96);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .nav-brand { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; }
+    .nav-step { font-size: 12px; color: var(--muted); }
+    .nav-back {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    /* PROGRESS BAR */
+    .progress-wrap {
+      height: 3px;
+      background: var(--border);
+      width: 100%;
+    }
+    .progress-bar {
+      height: 3px;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* HERO */
+    .survey-hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 48px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .survey-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #161616;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .survey-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .survey-hero p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 0;
+      line-height: 1.65;
+    }
+    .survey-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .survey-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .survey-meta-item span { color: var(--gold); font-weight: 700; }
+
+    /* FORM WRAPPER */
+    .form-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    /* CATEGORY BLOCK */
+    .category {
+      padding-top: 48px;
+    }
+    .category-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .category-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* QUESTION */
+    .question {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+    .question:focus-within {
+      border-color: rgba(245,197,24,0.3);
+    }
+    .q-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .q-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .q-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      margin-top: 4px;
+    }
+
+    /* RADIO OPTIONS */
+    .options { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .option:hover {
+      border-color: #444;
+      background: rgba(255,255,255,0.02);
+    }
+    .option input[type="radio"],
+    .option input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #444;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .option input[type="checkbox"] {
+      border-radius: 4px;
+    }
+    .option input[type="radio"]:checked {
+      border-color: var(--gold);
+      background: var(--gold);
+      box-shadow: inset 0 0 0 3px var(--bg-card);
+    }
+    .option input[type="checkbox"]:checked {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .option input[type="checkbox"]:checked::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 6px;
+      border-left: 2px solid #000;
+      border-bottom: 2px solid #000;
+      transform: rotate(-45deg) translate(1px, -1px);
+      position: absolute;
+      top: 3px;
+      left: 2px;
+    }
+    .option:has(input:checked) {
+      border-color: rgba(245,197,24,0.35);
+      background: rgba(245,197,24,0.04);
+    }
+    .option-label {
+      font-size: 14px;
+      color: #cccccc;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    /* TEXTAREA */
+    textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 12px 14px;
+      margin-top: 16px;
+      resize: vertical;
+      min-height: 96px;
+      line-height: 1.6;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    textarea::placeholder { color: #444; }
+    textarea:focus { border-color: rgba(245,197,24,0.4); }
+
+    /* EMAIL FIELD */
+    .email-block {
+      margin-top: 48px;
+      padding: 32px;
+      background: rgba(245,197,24,0.04);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: 12px;
+    }
+    .email-block h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .email-block p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+    .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input[type="email"]::placeholder { color: #444; }
+    input[type="email"]:focus { border-color: rgba(245,197,24,0.4); }
+
+    /* SUBMIT */
+    .submit-wrap { margin-top: 24px; }
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-submit:hover { opacity: 0.88; }
+    .submit-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* THANK YOU STATE */
+    #thank-you {
+      display: none;
+      max-width: 680px;
+      margin: 80px auto;
+      padding: 0 48px;
+      text-align: center;
+    }
+    #thank-you .ty-icon { font-size: 48px; margin-bottom: 20px; }
+    #thank-you h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+    #thank-you p { color: var(--muted); font-size: 15px; max-width: 400px; margin: 0 auto 24px; }
+    .ty-detail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gold);
+      background: rgba(245,197,24,0.08);
+      border: 1px solid rgba(245,197,24,0.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+    }
+
+    /* DIVIDER */
+    .q-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0 0; }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 12px; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .survey-hero, .form-wrap { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <span class="nav-brand">State of AI-Led Growth</span>
+    <span class="nav-step">2026 Survey</span>
+  </div>
+  <a href="index.html" class="nav-back">&larr; Back to overview</a>
+</nav>
+<div class="progress-wrap">
+  <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+<!-- HERO -->
+<div class="survey-hero">
+  <div class="survey-badge">GrowthX Research &nbsp;·&nbsp; 2026</div>
+  <h1>The State of AI-Led Growth Survey</h1>
+  <p>19 questions on how GTM teams are actually using AI in 2026 — and whether they have any strategy for how AI talks about them. Your answers shape a free benchmark report published June 1.</p>
+  <div class="survey-meta">
+    <div class="survey-meta-item"><span>19</span> questions</div>
+    <div class="survey-meta-item"><span>~5 min</span> to complete</div>
+    <div class="survey-meta-item"><span>Free</span> report access for all respondents</div>
+    <div class="survey-meta-item">Closes <span>May 30, 2026</span></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<form class="form-wrap" id="survey-form" onsubmit="handleSubmit(event)">
+
+  <!-- DEMOGRAPHICS -->
+  <div class="category">
+    <div class="category-label">About You</div>
+    <div class="category-desc">Two quick questions so we can segment findings by role and stage.</div>
+
+    <div class="question">
+      <div class="q-num">Q1</div>
+      <div class="q-text">What's your role?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="founder"> <span class="option-label">Founder / CEO / Co-founder</span></label>
+        <label class="option"><input type="radio" name="q1" value="vp-marketing"> <span class="option-label">VP or Director of Marketing</span></label>
+        <label class="option"><input type="radio" name="q1" value="growth-lead"> <span class="option-label">Head of Growth / Growth Lead</span></label>
+        <label class="option"><input type="radio" name="q1" value="marketing-ops"> <span class="option-label">Marketing Ops / RevOps</span></label>
+        <label class="option"><input type="radio" name="q1" value="content-lead"> <span class="option-label">Content Lead / Head of Content</span></label>
+        <label class="option"><input type="radio" name="q1" value="other"> <span class="option-label">Other</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q2</div>
+      <div class="q-text">What stage is your company?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q2" value="seed"> <span class="option-label">Pre-seed / Seed</span></label>
+        <label class="option"><input type="radio" name="q2" value="series-a"> <span class="option-label">Series A</span></label>
+        <label class="option"><input type="radio" name="q2" value="series-bc"> <span class="option-label">Series B–C</span></label>
+        <label class="option"><input type="radio" name="q2" value="series-d"> <span class="option-label">Series D+ / Growth stage</span></label>
+        <label class="option"><input type="radio" name="q2" value="bootstrapped"> <span class="option-label">Bootstrapped / Profitable</span></label>
+        <label class="option"><input type="radio" name="q2" value="enterprise"> <span class="option-label">Enterprise (1,000+ employees)</span></label>
+      </div>
+    </div>
+  </div>
+
+  <hr class="q-divider">
+
+  <!-- ADOPTION -->
+  <div class="category">
+    <div class="category-label">Adoption &amp; Maturity</div>
+    <div class="category-desc">How embedded is AI in your team's GTM workflow today?</div>
+
+    <div class="question">
+      <div class="q-num">Q3</div>
+      <div class="q-text">How would you describe your team's current AI use in GTM work?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q3" value="exploring"> <span class="option-label">Just starting to explore</span></label>
+        <label class="option"><input type="radio" name="q3" value="occasional"> <span class="option-label">We use it occasionally for specific tasks</span></label>
+        <label class="option"><input type="radio" name="q3" value="most-workflow"> <span class="option-label">It's part of most of our workflow</span></label>
+        <label class="option"><input type="radio" name="q3" value="rebuilt"> <span class="option-label">We've rebuilt our processes around it</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q4</div>
+      <div class="q-text">How long has your team been actively using AI for marketing or growth?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="under-6mo"> <span class="option-label">Less than 6 months</span></label>
+        <label class="option"><input type="radio" name="q4" value="6-12mo"> <span class="option-label">6–12 months</span></label>
+        <label class="option"><input type="radio" name="q4" value="1-2yr"> <span class="option-label">1–2 years</span></label>
+        <label class="option"><input type="radio" name="q4" value="2yr-plus"> <span class="option-label">2+ years</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q5</div>
+      <div class="q-text">How many people on your team regularly use AI for GTM tasks?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q5" value="just-me"> <span class="option-label">Just me</span></label>
+        <label class="option"><input type="radio" name="q5" value="2-3"> <span class="option-label">2–3 people</span></label>
+        <label class="option"><input type="radio" name="q5" value="4-10"> <span class="option-label">4–10 people</span></label>
+        <label class="option"><input type="radio" name="q5" value="most"> <span class="option-label">Most or all of the team</span></label>
+      </div>
+    </div>
+  </div>
+
+  <hr class="q-divider">
+
+  <!-- USE CASES -->
+  <div class="category">
+    <div class="category-label">Use Cases &amp; Tools</div>
+    <div class="category-desc">What AI is actually being used for on the ground.</div>
+
+    <div class="question">
+      <div class="q-num">Q6</div>
+      <div class="q-text">Which areas is your team actively using AI for?</div>
+      <div class="q-note">Select all that apply</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q6" value="content"> <span class="option-label">Content creation</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="outbound"> <span class="option-label">Outbound &amp; prospecting</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="research"> <span class="option-label">Research &amp; competitive intel</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="analytics"> <span class="option-label">Analytics &amp; reporting</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="ai-visibility"> <span class="option-label">AI visibility &amp; search presence</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="paid"> <span class="option-label">Paid advertising</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="crm"> <span class="option-label">CRM &amp; lead scoring</span></label>
+        <label class="option"><input type="checkbox" name="q6" value="strategy"> <span class="option-label">Campaign strategy &amp; planning</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q7</div>
+      <div class="q-text">Which AI tools does your team use most?</div>
+      <div class="q-note">Select all that apply</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q7" value="chatgpt"> <span class="option-label">ChatGPT</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="claude"> <span class="option-label">Claude</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="gemini"> <span class="option-label">Gemini</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="perplexity"> <span class="option-label">Perplexity</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="cursor"> <span class="option-label">Cursor</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="hubspot-ai"> <span class="option-label">HubSpot AI</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="jasper"> <span class="option-label">Jasper or Copy.ai</span></label>
+        <label class="option"><input type="checkbox" name="q7" value="other"> <span class="option-label">Other</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q8</div>
+      <div class="q-text">Which task has AI made the biggest difference for your team in the last 6 months?</div>
+      <textarea name="q8" placeholder="Describe the task and what changed..."></textarea>
+    </div>
+  </div>
+
+  <hr class="q-divider">
+
+  <!-- RESULTS -->
+  <div class="category">
+    <div class="category-label">Results, Expectations &amp; Tensions</div>
+    <div class="category-desc">Where AI is delivering — and where it's creating new friction.</div>
+
+    <div class="question">
+      <div class="q-num">Q9</div>
+      <div class="q-text">Where have you seen the clearest return from AI in your GTM work?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q9" value="speed"> <span class="option-label">Speed / time savings</span></label>
+        <label class="option"><input type="radio" name="q9" value="quality"> <span class="option-label">Content quality</span></label>
+        <label class="option"><input type="radio" name="q9" value="pipeline"> <span class="option-label">Pipeline or revenue directly attributed</span></label>
+        <label class="option"><input type="radio" name="q9" value="cost"> <span class="option-label">Cost reduction</span></label>
+        <label class="option"><input type="radio" name="q9" value="no-roi"> <span class="option-label">Haven't seen clear ROI yet</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q10</div>
+      <div class="q-text">Looking back, how has AI in your GTM work compared to your original expectations?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="exceeded"> <span class="option-label">Far exceeded expectations</span></label>
+        <label class="option"><input type="radio" name="q10" value="delivered"> <span class="option-label">Mostly delivered</span></label>
+        <label class="option"><input type="radio" name="q10" value="mixed"> <span class="option-label">Mixed — some wins, some disappointments</span></label>
+        <label class="option"><input type="radio" name="q10" value="fallen-short"> <span class="option-label">Fallen short of what I hoped</span></label>
+        <label class="option"><input type="radio" name="q10" value="too-early"> <span class="option-label">Too early to tell</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q11</div>
+      <div class="q-text">What's your biggest challenge with AI in GTM work?</div>
+      <div class="q-note">Pick your top 2</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q11" value="brand-voice"> <span class="option-label">Maintaining brand voice and quality</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="skill-loss"> <span class="option-label">Team losing core skills (writing, strategy, creative thinking)</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="adoption"> <span class="option-label">Getting the team to use it consistently</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="tools"> <span class="option-label">Knowing which tools are worth it</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="measuring"> <span class="option-label">Measuring impact</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="accuracy"> <span class="option-label">Trust and accuracy concerns</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="integration"> <span class="option-label">Integrating into existing workflows</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="leadership"> <span class="option-label">Leadership buy-in</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q12</div>
+      <div class="q-text">Where does AI create as many new problems as it solves for your GTM team?</div>
+      <div class="q-note">Select up to 2</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q12" value="quality-tradeoff"> <span class="option-label">Faster output but harder to maintain quality</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="strategic-thinking"> <span class="option-label">More content but less strategic thinking</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="editing-time"> <span class="option-label">Saves time on tasks but adds time to reviewing and editing</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="tool-churn"> <span class="option-label">Tools change faster than we can keep up</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="no-problems"> <span class="option-label">None — the benefits clearly outweigh the challenges</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q13</div>
+      <div class="q-text">What do you wish AI could do for your GTM work that it can't do well today?</div>
+      <textarea name="q13" placeholder="Be as specific as you like..."></textarea>
+    </div>
+  </div>
+
+  <hr class="q-divider">
+
+  <!-- AI VISIBILITY -->
+  <div class="category">
+    <div class="category-label">AI Visibility &amp; AEO</div>
+    <div class="category-desc">This is the core of the research. Do GTM teams have any strategy for how AI talks about them?</div>
+
+    <div class="question">
+      <div class="q-num">Q14</div>
+      <div class="q-text">Are you actively tracking whether your brand shows up in AI-generated responses across ChatGPT, Perplexity, Gemini, and Claude?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q14" value="yes-track"> <span class="option-label">Yes, we track this regularly</span></label>
+        <label class="option"><input type="radio" name="q14" value="checked-few"> <span class="option-label">We've checked a few times but don't track it</span></label>
+        <label class="option"><input type="radio" name="q14" value="know-should"> <span class="option-label">We know we should but haven't started</span></label>
+        <label class="option"><input type="radio" name="q14" value="not-priority"> <span class="option-label">Not a priority for us right now</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q15</div>
+      <div class="q-text">Does your team have a defined strategy for how you appear in AI search results and recommendations?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q15" value="defined"> <span class="option-label">Yes, we have a defined strategy</span></label>
+        <label class="option"><input type="radio" name="q15" value="figuring-out"> <span class="option-label">We're figuring it out</span></label>
+        <label class="option"><input type="radio" name="q15" value="rely-seo"> <span class="option-label">We rely on our existing SEO and assume it carries over</span></label>
+        <label class="option"><input type="radio" name="q15" value="not-thought"> <span class="option-label">We haven't thought about it</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q16</div>
+      <div class="q-text">What's your biggest barrier to improving your AI visibility?</div>
+      <div class="q-note">Pick your top 1</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q16" value="dont-know-start"> <span class="option-label">Don't know where to start</span></label>
+        <label class="option"><input type="radio" name="q16" value="no-tool"> <span class="option-label">Don't have a tool to track it</span></label>
+        <label class="option"><input type="radio" name="q16" value="ownership"> <span class="option-label">Not sure who owns it on the team</span></label>
+        <label class="option"><input type="radio" name="q16" value="not-convinced"> <span class="option-label">Not convinced it matters yet</span></label>
+        <label class="option"><input type="radio" name="q16" value="budget"> <span class="option-label">Budget</span></label>
+        <label class="option"><input type="radio" name="q16" value="other"> <span class="option-label">Other</span></label>
+      </div>
+    </div>
+  </div>
+
+  <hr class="q-divider">
+
+  <!-- FUTURE INTENT -->
+  <div class="category">
+    <div class="category-label">Future Intent</div>
+    <div class="category-desc">Where GTM teams are headed with AI over the next 12 months.</div>
+
+    <div class="question">
+      <div class="q-num">Q17</div>
+      <div class="q-text">Where are you planning to invest most in AI for GTM in the next 12 months?</div>
+      <div class="q-note">Select your top 2</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q17" value="content-scale"> <span class="option-label">Content production at scale</span></label>
+        <label class="option"><input type="checkbox" name="q17" value="outbound"> <span class="option-label">Outbound &amp; prospecting</span></label>
+        <label class="option"><input type="checkbox" name="q17" value="ai-visibility"> <span class="option-label">AI visibility &amp; AEO</span></label>
+        <label class="option"><input type="checkbox" name="q17" value="marketing-ops"> <span class="option-label">Marketing ops &amp; automation</span></label>
+        <label class="option"><input type="checkbox" name="q17" value="strategy"> <span class="option-label">Strategy &amp; planning</span></label>
+        <label class="option"><input type="checkbox" name="q17" value="no-increase"> <span class="option-label">Not planning to increase AI investment</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q18</div>
+      <div class="q-text">How does AI figure into your team's competitive positioning today?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q18" value="differentiator"> <span class="option-label">It's a meaningful differentiator</span></label>
+        <label class="option"><input type="radio" name="q18" value="competitive"> <span class="option-label">Keeps us competitive but not ahead</span></label>
+        <label class="option"><input type="radio" name="q18" value="minimal"> <span class="option-label">Minimal impact so far</span></label>
+        <label class="option"><input type="radio" name="q18" value="behind"> <span class="option-label">We're behind and know it</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q19</div>
+      <div class="q-text">Which of these would be most valuable to your team right now?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q19" value="benchmark"> <span class="option-label">A benchmark report showing what growth teams like mine are doing</span></label>
+        <label class="option"><input type="radio" name="q19" value="workshop"> <span class="option-label">A live workshop on AI visibility</span></label>
+        <label class="option"><input type="radio" name="q19" value="community"> <span class="option-label">A community of practitioners sharing AI workflows</span></label>
+        <label class="option"><input type="radio" name="q19" value="tool"> <span class="option-label">A tool to track our AI presence across search engines</span></label>
+        <label class="option"><input type="radio" name="q19" value="playbook"> <span class="option-label">A playbook for AI-assisted GTM</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL GATE -->
+  <div class="email-block">
+    <h3>Get your results when the report publishes.</h3>
+    <p>Drop your work email and we'll send you early access to the full State of AI-Led Growth report on June 1 — before it goes public. No spam, unsubscribe anytime.</p>
+    <div class="email-row">
+      <input type="email" name="email" placeholder="your@company.com">
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button type="submit" class="btn-submit">Submit my answers &rarr;</button>
+    <p class="submit-note">Free. Takes about 5 minutes. Survey closes May 30, 2026.</p>
+  </div>
+
+</form>
+
+<!-- THANK YOU -->
+<div id="thank-you">
+  <div class="ty-icon">✦</div>
+  <h2>You're in.</h2>
+  <p>Thanks for contributing. You'll get early access to the State of AI-Led Growth report when it publishes June 1.</p>
+  <div class="ty-detail">Early report access confirmed for June 1, 2026</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>State of AI-Led Growth 2026 &nbsp;·&nbsp; GrowthX &nbsp;·&nbsp; growthx.ai/survey</p>
+  <p><a href="index.html">Back to overview</a> &nbsp;·&nbsp; <a href="https://growthx.ai">growthx.ai</a></p>
+</footer>
+
+<script>
+  // Progress bar based on scroll
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const total = doc.scrollHeight - doc.clientHeight;
+    const pct = (scrolled / total) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Handle form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('thank-you').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
