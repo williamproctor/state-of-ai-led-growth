@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Demo | GrowthX</title>
+  <meta name="description" content="Schedule a demo with our team to learn how GrowthX can help accelerate your growth with AI-powered solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f1eee9;
+      --cream-muted: rgba(26, 26, 26, 0.55);
+      --charcoal: #111111;
+      --border-dark: rgba(255, 255, 255, 0.15);
+      --gold: #c9a227;
+      --ui-black: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--ui-black);
+      background: var(--cream);
+    }
+
+    .shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    @media (min-width: 1024px) {
+      .shell {
+        flex-direction: row;
+        height: 100vh;
+        min-height: 640px;
+      }
+    }
+
+    .panel-dark {
+      display: none;
+      flex-direction: column;
+      background: var(--charcoal);
+      color: #fff;
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .panel-dark {
+        display: flex;
+        width: 50%;
+        flex: 1 1 50%;
+      }
+    }
+
+    .panel-dark__inner {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 40px 40px 28px;
+      max-width: 640px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    @media (min-width: 1280px) {
+      .panel-dark__inner { padding: 40px 48px 28px; }
+    }
+
+    .gx-logo-link { display: inline-block; margin-bottom: 32px; }
+    .gx-logo {
+      height: 18px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .panel-dark .case-chart__brand img,
+    .panel-dark .logo-marquee img,
+    .mobile-social .logo-marquee img {
+      filter: brightness(0) invert(1);
+    }
+    .panel-dark .case-chart__brand img { opacity: 0.95; }
+    .panel-dark .logo-marquee img,
+    .mobile-social .logo-marquee img {
+      opacity: 0.38;
+      transition: opacity 0.25s ease;
+    }
+    .panel-dark .logo-marquee a:hover img,
+    .mobile-social .logo-marquee a:hover img {
+      opacity: 0.95;
+    }
+
+    /* Same headline as growthx.ai/book-demo */
+    .panel-dark h1 {
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      max-width: 18ch;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .carousel-slides {
+      position: relative;
+      flex: 1;
+    }
+    .carousel-slide {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    .carousel-slide.is-active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .case-row {
+      display: grid;
+      grid-template-columns: minmax(140px, 180px) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (min-width: 1280px) {
+      .case-row {
+        grid-template-columns: minmax(160px, 220px) 1fr;
+        gap: 32px;
+      }
+    }
+
+    .case-chart {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 1;
+      border: 0.5px solid var(--border-dark);
+      border-top-color: rgba(255,255,255,0.25);
+      border-left-color: rgba(255,255,255,0.25);
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+    .case-chart:hover { background: rgba(255,255,255,0.03); }
+
+    .case-chart__brand.lm-lovable img { height: 20px; width: auto; }
+    @media (min-width: 1280px) {
+      .case-chart__brand.lm-lovable img { height: 24px; }
+    }
+
+    .case-chart__metric-num {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      opacity: 0.9;
+    }
+    .case-chart__metric-num.is-placeholder {
+      font-size: clamp(28px, 4vw, 48px);
+      opacity: 0.35;
+      font-weight: 600;
+    }
+    .case-chart__metric-label {
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.65);
+      max-width: 14ch;
+    }
+
+    .case-quote blockquote {
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      text-indent: -0.5em;
+      padding-left: 0.5em;
+    }
+    @media (min-width: 1280px) {
+      .case-quote blockquote { font-size: 14px; }
+    }
+
+    .case-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .case-person img {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      background: rgba(255,255,255,0.1);
+    }
+    @media (min-width: 1280px) {
+      .case-person img { width: 40px; height: 40px; }
+    }
+    .case-person-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .case-person-role {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 1px;
+    }
+
+    /* Tabs — book-demo style progress bars */
+    .carousel-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .carousel-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      font: inherit;
+    }
+    .carousel-tab .bar {
+      height: 2px;
+      background: rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+    .carousel-tab .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      transition: width 0.35s ease;
+    }
+    .carousel-tab.is-active .bar-fill { width: 100%; }
+    .carousel-tab .label {
+      font-size: 11px;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.28);
+      transition: color 0.25s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (min-width: 1280px) {
+      .carousel-tab .label { font-size: 12px; }
+    }
+    .carousel-tab:hover .label { color: rgba(255,255,255,0.45); }
+    .carousel-tab.is-active .label { color: #fff; }
+
+    .logo-marquee {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 28px;
+      margin-top: 28px;
+      padding-top: 20px;
+    }
+    .logo-marquee a {
+      line-height: 0;
+    }
+    .logo-marquee img {
+      height: 14px;
+      width: auto;
+      display: block;
+    }
+    @media (min-width: 1280px) {
+      .logo-marquee img { height: 16px; }
+    }
+    .logo-marquee .lm-lovable img { height: 12px; }
+    @media (min-width: 1280px) {
+      .logo-marquee .lm-lovable img { height: 14px; }
+    }
+
+    /* Cream — mirrors book-demo right column (form area → CTA to live page) */
+    .panel-cream {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .panel-cream__inner {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 40px 28px 48px;
+      width: 100%;
+    }
+    @media (min-width: 1024px) {
+      .panel-cream__inner {
+        padding: 48px 40px 56px;
+        justify-content: center;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .panel-cream h2 {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--ui-black);
+    }
+
+    .lead {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--cream-muted);
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: #0a0a0a;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 15px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .aeo-note {
+      margin-top: 20px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--cream-muted);
+      background: rgba(0,0,0,0.04);
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .aeo-note strong { color: var(--ui-black); font-weight: 600; }
+
+    details.optional {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    details.optional summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ui-black);
+      list-style: none;
+    }
+    details.optional summary::-webkit-details-marker { display: none; }
+    .optional-body {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--cream-muted);
+    }
+    .optional-body a { color: var(--ui-black); }
+
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 20px 28px;
+      font-size: 12px;
+      color: var(--cream-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: inherit; text-decoration: none; }
+    footer a:hover { color: var(--ui-black); }
+
+    .mobile-social {
+      display: block;
+      background: var(--charcoal);
+      color: #fff;
+      padding: 28px 24px 36px;
+    }
+    @media (min-width: 1024px) {
+      .mobile-social { display: none; }
+    }
+    .mobile-social h3 {
+      font-size: clamp(22px, 4vw, 28px);
+      font-weight: 700;
+      line-height: 1.12;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      max-width: 20ch;
+    }
+    .mobile-social .logo-marquee {
+      padding-top: 20px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="panel-dark" aria-label="Customer stories">
+    <div class="panel-dark__inner">
+      <a class="gx-logo-link" href="https://growthx.ai" aria-label="GrowthX Home">
+        <img class="gx-logo" src="./assets/growthx-logo-dark.svg" width="113" height="18" alt="GrowthX">
+      </a>
+
+      <h1>Turn your website into a growth engine.</h1>
+
+      <div class="carousel" id="case-carousel">
+        <div class="carousel-slides">
+
+          <div class="carousel-slide is-active" id="slide-0" data-slide="0" role="tabpanel">
+            <div class="case-row">
+              <a class="case-chart" href="https://growthx.ai/customers/lovable" target="_blank" rel="noopener">
+                <div class="case-chart__brand lm-lovable">
+                  <img src="./assets/lovable.svg" alt="" width="120" height="24">
+                </div>
+                <div class="case-chart__metric">
+                  <div class="case-chart__metric-num is-placeholder" aria-hidden="true">—</div>
+                  <div class="case-chart__metric-label">LLM referral traffic in 3 months</div>
+                </div>
+              </a>
+              <div class="case-quote">
+                <blockquote>“GrowthX matched Lovable's pace, standing up new organic programs in weeks that would have taken others a year. Every forward-looking CMO needs a platform combining AI and expert strategists like this.”</blockquote>
+                <div class="case-person">
+                  <img src="https://growthx.ai/_next/image?url=%2Fimages%2Fcase-studies%2Flovable-portrait.png&amp;w=96&amp;q=75" alt="" width="40" height="40">
+                  <div>
+                    <div class="case-person-name">Cecilia Stallsmith</div>
+                    <div class="case-person-role">Head of Marketing, Lovable</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-slide" id="slide-1" data-slide="1" role="tabpanel" hidden>
+            <div class="case-row">
+              <a class="case-chart" href="https://growthx.ai/customers/abnormal" target="_blank" rel="noopener">
+                <div class="case-chart__brand">
+                  <img src="./assets/abnormal.svg" alt="" width="90" height="24">
+                </div>
+                <div class="case-chart__metric">
+                  <div class="case-chart__metric-num is-placeholder" aria-hidden="true">—</div>
+                  <div class="case-chart__metric-label">Increase in organic website traffic</div>
+                </div>
+              </a>
+              <div class="case-quote">
+                <blockquote>“GrowthX has cracked the code on how to increase volume while maintaining quality. The process is end-to-end, smooth, and we're seeing increases in traffic and clicks.”</blockquote>
+                <div class="case-person">
+                  <img src="https://growthx.ai/_next/image?url=%2Fimages%2Fcase-studies%2Fabnormal-portrait.png&amp;w=96&amp;q=75" alt="" width="40" height="40">
+                  <div>
+                    <div class="case-person-name">Abdallah Al-Hakim</div>
+                    <div class="case-person-role">Senior Director of Marketing, Abnormal AI</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-slide" id="slide-2" data-slide="2" role="tabpanel" hidden>
+            <div class="case-row">
+              <a class="case-chart" href="https://growthx.ai/customers/monograph" target="_blank" rel="noopener">
+                <div class="case-chart__brand">
+                  <img src="./assets/monograph.svg" alt="" width="100" height="20">
+                </div>
+                <div class="case-chart__metric">
+                  <div class="case-chart__metric-num is-placeholder" aria-hidden="true">—</div>
+                  <div class="case-chart__metric-label">Of non-branded traffic from engineering keywords</div>
+                </div>
+              </a>
+              <div class="case-quote">
+                <blockquote>“GrowthX was the ideal fit because they're more like a software product than an agency. They're not trying to solve a scale problem with more human labor.”</blockquote>
+                <div class="case-person">
+                  <img src="https://growthx.ai/_next/image?url=%2Fimages%2Fcase-studies%2Fmonograph-portrait.png&amp;w=96&amp;q=75" alt="" width="40" height="40">
+                  <div>
+                    <div class="case-person-name">Robert Yuen</div>
+                    <div class="case-person-role">Co-founder and CEO, Monograph</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="carousel-tabs" role="tablist" aria-label="Choose customer story">
+          <button type="button" class="carousel-tab is-active" role="tab" aria-selected="true" aria-controls="slide-0" id="tab-0" data-index="0">
+            <span class="bar" aria-hidden="true"><span class="bar-fill"></span></span>
+            <span class="label">Lovable</span>
+          </button>
+          <button type="button" class="carousel-tab" role="tab" aria-selected="false" aria-controls="slide-1" id="tab-1" data-index="1">
+            <span class="bar" aria-hidden="true"><span class="bar-fill"></span></span>
+            <span class="label">Abnormal AI</span>
+          </button>
+          <button type="button" class="carousel-tab" role="tab" aria-selected="false" aria-controls="slide-2" id="tab-2" data-index="2">
+            <span class="bar" aria-hidden="true"><span class="bar-fill"></span></span>
+            <span class="label">Monograph</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="logo-marquee" aria-label="Featured customers">
+        <a href="https://growthx.ai/customers/lovable" target="_blank" rel="noopener" class="lm-lovable" aria-label="Lovable">
+          <img src="./assets/lovable.svg" alt="" width="100" height="20" loading="lazy">
+        </a>
+        <a href="https://growthx.ai/customers/abnormal" target="_blank" rel="noopener" aria-label="Abnormal AI">
+          <img src="./assets/abnormal.svg" alt="" width="90" height="24" loading="lazy">
+        </a>
+        <a href="https://growthx.ai/customers/monograph" target="_blank" rel="noopener" aria-label="Monograph">
+          <img src="./assets/monograph.svg" alt="" width="100" height="20" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="panel-cream">
+    <div class="panel-cream__inner">
+      <h2>Request a demo</h2>
+      <p class="lead">Schedule a demo with our team to learn how GrowthX can help accelerate your growth with AI-powered solutions.</p>
+
+      <a href="https://growthx.ai/book-demo?utm_source=danni-workspace&utm_medium=web&utm_campaign=aeo-landing&utm_content=primary-cta" class="btn-primary">Book a demo</a>
+
+      <p class="aeo-note"><strong>AI visibility &amp; AEO.</strong> If you came here for answer-engine strategy, you’re in the right place—the same demo booking covers how GrowthX approaches organic growth, including AI visibility. Completing booking happens on <a href="https://growthx.ai/book-demo">growthx.ai</a>.</p>
+
+      <details class="optional">
+        <summary>Optional: research notes (same stats as before)</summary>
+        <div class="optional-body" id="sources">
+          <p>Directional benchmarks from a multi-source synthesis (Loganix via PR Newswire, Apr 2026): e.g. 73% of B2B buyers using AI in purchase research, 78% of marketers with no AI visibility strategy, 22% tracking visibility, AI-referred traffic conversion multiples vs. organic in some studies.</p>
+          <p style="margin-top:10px">
+            <a href="https://www.prnewswire.com/news-releases/73-of-b2b-buyers-use-ai-tools-in-purchase-research-multi-source-analysis-finds-302733319.html" target="_blank" rel="noopener">PR Newswire — Loganix synthesis</a>
+            ·
+            <a href="https://learn.g2.com/the-visibility-shift-how-to-measure-brand-presence-in-ai-answers" target="_blank" rel="noopener">G2 — AI answers visibility</a>
+          </p>
+        </div>
+      </details>
+    </div>
+
+    <section class="mobile-social" aria-label="Customer proof">
+      <h3>Turn your website into a growth engine.</h3>
+      <div class="case-quote" style="margin-bottom: 4px;">
+        <blockquote style="font-size: 13px; color: rgba(255,255,255,0.5);">“GrowthX matched Lovable's pace, standing up new organic programs in weeks that would have taken others a year.”</blockquote>
+      </div>
+      <div class="logo-marquee">
+        <a href="https://growthx.ai/customers/lovable" target="_blank" rel="noopener" class="lm-lovable" aria-label="Lovable">
+          <img src="./assets/lovable.svg" alt="" loading="lazy">
+        </a>
+        <a href="https://growthx.ai/customers/abnormal" target="_blank" rel="noopener" aria-label="Abnormal AI">
+          <img src="./assets/abnormal.svg" alt="" loading="lazy">
+        </a>
+        <a href="https://growthx.ai/customers/monograph" target="_blank" rel="noopener" aria-label="Monograph">
+          <img src="./assets/monograph.svg" alt="" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <span>GrowthX · Request a demo</span>
+      <a href="https://growthx.ai">growthx.ai</a>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var slides = document.querySelectorAll('.carousel-slide');
+  var tabs = document.querySelectorAll('.carousel-tab');
+  var idx = 0;
+  var timer = null;
+
+  function go(n) {
+    idx = n;
+    slides.forEach(function (el, i) {
+      var on = i === n;
+      el.classList.toggle('is-active', on);
+      el.toggleAttribute('hidden', !on);
+    });
+    tabs.forEach(function (t, i) {
+      var on = i === n;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var n = parseInt(tab.getAttribute('data-index'), 10);
+      if (timer) clearInterval(timer);
+      go(n);
+      timer = setInterval(function () {
+        go((idx + 1) % 3);
+      }, 9000);
+    });
+  });
+
+  timer = setInterval(function () {
+    go((idx + 1) % 3);
+  }, 9000);
+})();
+</script>
+
+</body>
+</html>
