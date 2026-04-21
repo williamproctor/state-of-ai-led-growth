@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ALG Multiplier Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090909;
+    --teal: #2dd4a0;
+    --text: #f0f0f0;
+    --muted: #5a5a5a;
+    --muted-light: #888;
+    --dim: #1c1c1c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 52px 80px 64px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: 52px;
+    max-width: 680px;
+  }
+  h1 strong { font-weight: 600; }
+
+  .diagram-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+
+  .rule { height: 1px; background: var(--dim); margin: 0 0 40px; }
+
+  .output-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--dim);
+    border: 1px solid var(--dim);
+    margin-bottom: 40px;
+  }
+  .output-col {
+    background: var(--bg);
+    padding: 24px 20px;
+  }
+  .output-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .output-item {
+    font-size: 12px;
+    color: var(--muted-light);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .output-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+  .output-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(45,212,160,0.3);
+    padding: 3px 7px;
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .callout {
+    border-left: 2px solid var(--teal);
+    padding: 16px 20px;
+    background: rgba(45,212,160,0.04);
+    max-width: 860px;
+  }
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .callout p { font-size: 13px; color: var(--muted-light); line-height: 1.6; }
+
+  .footnote {
+    margin-top: 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">AI-Led Growth — Content Strategy</div>
+  <h1>One recording becomes five assets.<br><strong>Video is the only format that feeds every lane at once.</strong></h1>
+
+  <div class="diagram-wrap">
+    <svg width="720" height="540" viewBox="0 0 720 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Spoke lines: center (360,260) to each outer node -->
+      <!-- Newsletter (top) to center -->
+      <line x1="360" y1="260" x2="360" y2="90" stroke="#1c1c1c" stroke-width="1.5"/>
+      <!-- Community (top-right) -->
+      <line x1="360" y1="260" x2="532" y2="200" stroke="#1c1c1c" stroke-width="1.5"/>
+      <!-- YouTube (bottom-right) -->
+      <line x1="360" y1="260" x2="496" y2="408" stroke="#1c1c1c" stroke-width="1.5"/>
+      <!-- Social (bottom-left) -->
+      <line x1="360" y1="260" x2="224" y2="408" stroke="#1c1c1c" stroke-width="1.5"/>
+      <!-- GrowthX (top-left) — dashed, teal, destination -->
+      <line x1="360" y1="260" x2="188" y2="200" stroke="#2dd4a0" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.6"/>
+
+      <!-- Outer node: Newsletter (top, angle -90°) -->
+      <circle cx="360" cy="68" r="50" fill="#090909" stroke="#2dd4a0" stroke-width="1"/>
+      <text x="360" y="62" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.1" fill="#2dd4a0">NEWSLETTER</text>
+      <text x="360" y="76" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888">The Messy Middle</text>
+      <text x="360" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#5a5a5a">educates · nurtures</text>
+
+      <!-- Outer node: Community (top-right, angle -18°) -->
+      <circle cx="554" cy="178" r="52" fill="#090909" stroke="#1c1c1c" stroke-width="1"/>
+      <text x="554" y="171" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.1" fill="#2dd4a0">COMMUNITY</text>
+      <text x="554" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888">AMAs · events</text>
+      <text x="554" y="199" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#5a5a5a">retains · deepens</text>
+
+      <!-- Outer node: YouTube / TikTok (bottom-right, angle 54°) -->
+      <circle cx="516" cy="422" r="52" fill="#090909" stroke="#1c1c1c" stroke-width="1"/>
+      <text x="516" y="415" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.1" fill="#2dd4a0">YOUTUBE</text>
+      <text x="516" y="429" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888">TikTok · organic</text>
+      <text x="516" y="443" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#5a5a5a">acquires · discovers</text>
+
+      <!-- Outer node: Social / LinkedIn (bottom-left, angle 126°) -->
+      <circle cx="204" cy="422" r="52" fill="#090909" stroke="#1c1c1c" stroke-width="1"/>
+      <text x="204" y="415" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.1" fill="#2dd4a0">SOCIAL</text>
+      <text x="204" y="429" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888">LinkedIn · clips</text>
+      <text x="204" y="443" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#5a5a5a">builds reach</text>
+
+      <!-- Outer node: GrowthX (top-left, angle 198°) — destination -->
+      <circle cx="166" cy="178" r="52" fill="#090909" stroke="#2dd4a0" stroke-width="1"/>
+      <text x="166" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.1" fill="#2dd4a0">GROWTHX</text>
+      <text x="166" y="182" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888">agency · Content OS</text>
+      <text x="166" y="196" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#2dd4a0">converts</text>
+
+      <!-- Center circle: VIDEO -->
+      <circle cx="360" cy="260" r="78" fill="#2dd4a0"/>
+      <text x="360" y="248" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" letter-spacing="0.12" fill="#090909">VIDEO /</text>
+      <text x="360" y="264" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" letter-spacing="0.12" fill="#090909">LIVE CONTENT</text>
+      <text x="360" y="282" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="rgba(9,9,9,0.55)">one recording</text>
+
+      <!-- Label for dashed line -->
+      <text x="238" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#5a5a5a" letter-spacing="0.06">all channels →</text>
+
+    </svg>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="output-grid">
+    <div class="output-col">
+      <div class="output-label">Newsletter</div>
+      <div class="output-item">Full issue or case study recap</div>
+      <div class="output-item">Subject line pulled from the recording</div>
+      <div class="output-item">Trust-building content over time</div>
+      <div class="output-tag">educates</div>
+    </div>
+    <div class="output-col">
+      <div class="output-label">Community</div>
+      <div class="output-item">Members-only replay or AMA</div>
+      <div class="output-item">Live session with guest expert</div>
+      <div class="output-item">Masterclass module anchor</div>
+      <div class="output-tag">retains</div>
+    </div>
+    <div class="output-col">
+      <div class="output-label">YouTube / TikTok</div>
+      <div class="output-item">Topic-led long-form tutorial</div>
+      <div class="output-item">Short-form clip (TikTok / Reels)</div>
+      <div class="output-item">Organic search discovery</div>
+      <div class="output-tag">acquires</div>
+    </div>
+    <div class="output-col">
+      <div class="output-label">Social</div>
+      <div class="output-item">LinkedIn clip or quote card</div>
+      <div class="output-item">Thread or breakdown post</div>
+      <div class="output-item">EGC from Marcel or team</div>
+      <div class="output-tag">builds reach</div>
+    </div>
+    <div class="output-col">
+      <div class="output-label">GrowthX</div>
+      <div class="output-item">Leads who already know the work</div>
+      <div class="output-item">Content OS tutorial embedded</div>
+      <div class="output-item">Survey respondent → pipeline signal</div>
+      <div class="output-tag">converts</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Why this matters</div>
+    <p>Video is the only format where one effort multiplies across every channel at once. A single recording becomes educational content, community programming, organic discovery, social reach, and a pipeline driver — simultaneously. All channels route to GrowthX. It's the highest-leverage work available. It's also the one thing that's been paused.</p>
+  </div>
+
+  <p class="footnote">AI-Led Growth · Content Strategy · GrowthX · April 2026</p>
+
+</body>
+</html>
