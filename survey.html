@@ -420,23 +420,87 @@
       font-style: italic;
     }
 
-    /* MILESTONE */
-    .milestone {
-      margin: 32px 0 0;
-      padding: 20px 24px;
-      background: rgba(245,197,24,0.04);
-      border: 1px solid rgba(245,197,24,0.15);
-      border-radius: 12px;
+    /* SECTION-BY-SECTION MODE */
+    .category { display: none; }
+    .category.active { display: block; }
+    .q-divider { display: none; }
+    .milestone { display: none; }
+    .email-block { display: none; }
+    .submit-wrap { display: none; }
+
+    /* SECTION FOOTER (Next/Back) */
+    .section-footer {
       display: flex;
       align-items: center;
-      gap: 14px;
+      justify-content: space-between;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
     }
-    .milestone-icon { font-size: 22px; flex-shrink: 0; }
-    .milestone-text { font-size: 13px; color: #cccccc; line-height: 1.5; }
-    .milestone-text strong { color: var(--text); }
+    .btn-section-next {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .btn-section-next:hover { opacity: 0.88; }
+    .btn-section-back {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color 0.15s;
+      font-family: inherit;
+    }
+    .btn-section-back:hover { color: var(--text); }
 
-    /* DIVIDER */
-    .q-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0 0; }
+    /* MILESTONE INTERSTITIAL SCREEN */
+    #milestone-screen {
+      display: none;
+      text-align: center;
+      padding: 80px 24px 60px;
+      flex-direction: column;
+      align-items: center;
+    }
+    #milestone-screen.active { display: flex; }
+    .ms-inner { max-width: 520px; margin: 0 auto; }
+    .ms-icon { font-size: 48px; margin-bottom: 20px; }
+    .ms-text {
+      font-size: 17px;
+      color: #cccccc;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .ms-text strong { color: var(--text); font-size: 18px; }
+    .btn-ms-continue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      font-family: inherit;
+    }
+    .btn-ms-continue:hover { opacity: 0.88; }
 
     /* FOOTER */
     footer {
@@ -883,6 +947,15 @@
     </div>
   </div>
 
+  <!-- MILESTONE INTERSTITIAL -->
+  <div id="milestone-screen">
+    <div class="ms-inner">
+      <div class="ms-icon" id="ms-icon"></div>
+      <div class="ms-text" id="ms-text"></div>
+      <button type="button" class="btn-ms-continue" id="ms-continue">Keep going &rarr;</button>
+    </div>
+  </div>
+
   <!-- EMAIL GATE -->
   <div class="email-block">
     <h3>Get your results when the report publishes.</h3>
@@ -919,47 +992,130 @@
 </footer>
 
 <script>
-  // Section-based progress
-  const categories = document.querySelectorAll('.category');
-  const navItems = document.querySelectorAll('.section-nav-item');
-  const totalSections = categories.length;
+  const sections     = Array.from(document.querySelectorAll('.category'));
+  const navItems     = Array.from(document.querySelectorAll('.section-nav-item'));
+  const progressBar  = document.getElementById('progress-bar');
+  const sectionNav   = document.getElementById('section-nav');
+  const milestoneScr = document.getElementById('milestone-screen');
+  const msIcon       = document.getElementById('ms-icon');
+  const msText       = document.getElementById('ms-text');
+  const msContinue   = document.getElementById('ms-continue');
+  const emailBlock   = document.querySelector('.email-block');
+  const submitWrap   = document.querySelector('.submit-wrap');
+  const surveyForm   = document.getElementById('survey-form');
+  const thankYou     = document.getElementById('thank-you');
 
-  function updateProgress() {
-    const doc = document.documentElement;
-    const scrollMid = doc.scrollTop + window.innerHeight / 2;
+  // Milestone copy shown after completing the section at each index
+  const milestones = {
+    0: { icon: '👀', text: '<strong>Three questions in.</strong> You already gave us better data than most executives publish about themselves on LinkedIn. The bar is genuinely on the floor, and you cleared it.' },
+    2: { icon: '🔥', text: '<strong>AI section: done.</strong> If you were honest, you\'re already more self-aware than 80% of GTM takes published in the last six months. The open-text answer you just left? That\'s probably going to be the pull quote.' },
+    3: { icon: '📊', text: '<strong>Halfway.</strong> The spend question you just answered is the one nobody publishes. Most people dodge it in podcasts too. You didn\'t. Thank you. Seriously, that data is the whole point.' },
+    4: { icon: '📺', text: '<strong>Four down, two to go.</strong> This is where Netflix would ask if you\'re still watching. You clearly are. One category before AI visibility: the section where most teams will feel a little personally attacked. Hang tight.' },
+    5: { icon: '🏁', text: '<strong>Last section.</strong> We promise the final three questions don\'t ask you to rate your satisfaction with this survey experience. We would never.' }
+  };
 
-    let activeIdx = 0;
-    categories.forEach((cat, i) => {
-      if (cat.offsetTop <= scrollMid) activeIdx = i;
-    });
+  const continueLabels = [
+    'Continue: Adoption &amp; Maturity',
+    'Continue: Use Cases &amp; Tools',
+    'Continue: Content &amp; Growth Ops',
+    'Continue: Results &amp; Tensions',
+    'Continue: AI Visibility',
+    'Continue: Future Intent',
+    'One last thing'
+  ];
+
+  let currentSection = 0;
+  let pendingSection = -1;
+
+  // Inject Next/Back footer into each section
+  sections.forEach(function(sec, i) {
+    var footer = document.createElement('div');
+    footer.className = 'section-footer';
+    footer.innerHTML =
+      (i > 0 ? '<button type="button" class="btn-section-back" onclick="goBack()">\u2190 Back</button>' : '<span></span>') +
+      '<button type="button" class="btn-section-next" onclick="goNext()">' + continueLabels[i] + ' \u2192</button>';
+    sec.appendChild(footer);
+  });
+
+  // Back button on the email/submit step
+  var backFromEmail = document.createElement('button');
+  backFromEmail.type = 'button';
+  backFromEmail.className = 'btn-section-back';
+  backFromEmail.style.cssText = 'display:block;margin-bottom:16px;';
+  backFromEmail.textContent = '\u2190 Back';
+  backFromEmail.onclick = goBack;
+  submitWrap.prepend(backFromEmail);
+
+  // Milestone continue button
+  msContinue.addEventListener('click', function() {
+    milestoneScr.classList.remove('active');
+    showSection(pendingSection);
+  });
+
+  function showSection(idx) {
+    currentSection = idx;
+    sections.forEach(function(s) { s.classList.remove('active'); });
+    milestoneScr.classList.remove('active');
+    emailBlock.style.display = 'none';
+    submitWrap.style.display = 'none';
+
+    if (idx < sections.length) {
+      sections[idx].classList.add('active');
+    } else {
+      emailBlock.style.display = 'block';
+      submitWrap.style.display = 'block';
+    }
 
     // Update section nav
-    navItems.forEach((item, i) => {
+    navItems.forEach(function(item, i) {
       item.classList.remove('active', 'done');
-      if (i === activeIdx) item.classList.add('active');
-      else if (i < activeIdx) item.classList.add('done');
+      var navIdx = Math.min(idx, sections.length - 1);
+      if (i === navIdx) item.classList.add('active');
+      else if (i < navIdx) item.classList.add('done');
     });
 
-    // Update gold progress bar based on section progress
-    const pct = ((activeIdx) / (totalSections - 1)) * 100;
-    document.getElementById('progress-bar').style.width = pct + '%';
-
-    // Scroll active nav item into view
-    navItems[activeIdx].scrollIntoView({ inline: 'center', behavior: 'smooth' });
-  }
-
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
-
-  // Handle form submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    document.getElementById('progress-bar').style.width = '100%';
-    document.getElementById('survey-form').style.display = 'none';
-    document.getElementById('thank-you').style.display = 'block';
-    document.getElementById('section-nav').style.display = 'none';
+    // Update progress bar
+    progressBar.style.width = (idx / sections.length * 100) + '%';
+    var ni = navItems[Math.min(idx, navItems.length - 1)];
+    if (ni) ni.scrollIntoView({ inline: 'center', behavior: 'smooth' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  function goNext() {
+    var from = currentSection;
+    var to   = from + 1;
+    var m    = milestones[from];
+
+    if (m) {
+      pendingSection = to;
+      msIcon.textContent = m.icon;
+      msText.innerHTML   = m.text;
+      sections.forEach(function(s) { s.classList.remove('active'); });
+      emailBlock.style.display  = 'none';
+      submitWrap.style.display  = 'none';
+      milestoneScr.classList.add('active');
+      progressBar.style.width = (to / sections.length * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      showSection(to);
+    }
+  }
+
+  function goBack() {
+    if (currentSection > 0) showSection(currentSection - 1);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    progressBar.style.width = '100%';
+    surveyForm.style.display  = 'none';
+    sectionNav.style.display  = 'none';
+    thankYou.style.display    = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Start on section 0
+  showSection(0);
 </script>
 
 </body>
