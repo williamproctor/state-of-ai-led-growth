@@ -420,6 +420,23 @@
       font-style: italic;
     }
 
+    /* OTHER TEXT INPUT */
+    .other-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid rgba(245,197,24,0.3);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .other-input::placeholder { color: #444; }
+    .other-input:focus { border-color: rgba(245,197,24,0.6); }
+
     /* SECTION-BY-SECTION MODE */
     .category { display: none; }
     .category.active { display: block; }
@@ -577,8 +594,9 @@
         <label class="option"><input type="radio" name="q1" value="growth-lead"> <span class="option-label">Head of Growth / Growth Lead</span></label>
         <label class="option"><input type="radio" name="q1" value="marketing-ops"> <span class="option-label">Marketing Ops / RevOps</span></label>
         <label class="option"><input type="radio" name="q1" value="content-lead"> <span class="option-label">Content Lead / Head of Content</span></label>
-        <label class="option"><input type="radio" name="q1" value="other"> <span class="option-label">Other</span></label>
+        <label class="option"><input type="radio" name="q1" value="other" onchange="toggleOther(this,'q1-other')"> <span class="option-label">Other</span></label>
       </div>
+      <input type="text" class="other-input" id="q1-other" name="q1-other" placeholder="Tell us your role..." style="display:none;" autocomplete="off">
     </div>
 
     <div class="question">
@@ -691,8 +709,9 @@
         <label class="option"><input type="checkbox" name="q8" value="perplexity"> <span class="option-label">Perplexity</span></label>
         <label class="option"><input type="checkbox" name="q8" value="built-in"> <span class="option-label">Built into tools we already use (HubSpot, Notion, Salesforce, etc.)</span></label>
         <label class="option"><input type="checkbox" name="q8" value="jasper"> <span class="option-label">Jasper or Copy.ai</span></label>
-        <label class="option"><input type="checkbox" name="q8" value="other"> <span class="option-label">Other</span></label>
+        <label class="option"><input type="checkbox" name="q8" value="other" onchange="toggleOther(this,'q8-other')"> <span class="option-label">Other</span></label>
       </div>
+      <input type="text" class="other-input" id="q8-other" name="q8-other" placeholder="Which tool?" style="display:none;" autocomplete="off">
     </div>
 
     <div class="question">
@@ -891,8 +910,9 @@
         <label class="option"><input type="radio" name="q22" value="ownership"> <span class="option-label">Not sure who owns it on the team</span></label>
         <label class="option"><input type="radio" name="q22" value="not-convinced"> <span class="option-label">Not convinced it matters yet</span></label>
         <label class="option"><input type="radio" name="q22" value="budget"> <span class="option-label">Budget</span></label>
-        <label class="option"><input type="radio" name="q22" value="other"> <span class="option-label">Other</span></label>
+        <label class="option"><input type="radio" name="q22" value="other" onchange="toggleOther(this,'q22-other')"> <span class="option-label">Other</span></label>
       </div>
+      <input type="text" class="other-input" id="q22-other" name="q22-other" placeholder="What's holding you back?" style="display:none;" autocomplete="off">
     </div>
 
     <div class="milestone">
@@ -980,7 +1000,7 @@
   <div class="ty-detail">📊 Report access confirmed · June 2, 2026</div>
   <div class="ty-actions">
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://danni-sys.github.io/state-of-ai-led-growth/" class="ty-share" target="_blank" rel="noopener">Share with someone who should weigh in &rarr;</a>
-    <a href="https://community.growthai.led" class="ty-community" target="_blank" rel="noopener">Join the AI-Led Growth community →</a>
+    <a href="https://ailedgrowth.com/newsletter" class="ty-community" target="_blank" rel="noopener">Subscribe to The Messy Middle newsletter →</a>
   </div>
   <div class="ty-teaser">Early data is already surprising us. The report is going to be worth the wait.</div>
 </div>
@@ -1008,7 +1028,7 @@
   // Milestone copy shown after completing the section at each index
   const milestones = {
     0: { icon: '👀', text: '<strong>Three questions in.</strong> You already gave us better data than most executives publish about themselves on LinkedIn. The bar is genuinely on the floor, and you cleared it.' },
-    2: { icon: '🔥', text: '<strong>AI section: done.</strong> If you were honest, you\'re already more self-aware than 80% of GTM takes published in the last six months. The open-text answer you just left? That\'s probably going to be the pull quote.' },
+    2: { icon: '🔥', text: '<strong>AI section: done.</strong> If you were honest, you\'re already more self-aware than 80% of GTM takes published in the last six months. The next section is where things get interesting.' },
     3: { icon: '📊', text: '<strong>Halfway.</strong> The spend question you just answered is the one nobody publishes. Most people dodge it in podcasts too. You didn\'t. Thank you. Seriously, that data is the whole point.' },
     4: { icon: '📺', text: '<strong>Four down, two to go.</strong> This is where Netflix would ask if you\'re still watching. You clearly are. One category before AI visibility: the section where most teams will feel a little personally attacked. Hang tight.' },
     5: { icon: '🏁', text: '<strong>Last section.</strong> We promise the final three questions don\'t ask you to rate your satisfaction with this survey experience. We would never.' }
@@ -1112,6 +1132,24 @@
     sectionNav.style.display  = 'none';
     thankYou.style.display    = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Show/hide "Other" text inputs
+  function toggleOther(input, targetId) {
+    var el = document.getElementById(targetId);
+    if (!el) return;
+    if (input.type === 'checkbox') {
+      el.style.display = input.checked ? 'block' : 'none';
+    } else {
+      // Radio: show if this specific "Other" radio is selected
+      el.style.display = input.checked ? 'block' : 'none';
+      // Also hide if any sibling radio is selected that isn't "other"
+      var siblings = document.querySelectorAll('input[name="' + input.name + '"]');
+      siblings.forEach(function(sib) {
+        if (sib !== input && sib.checked) el.style.display = 'none';
+      });
+    }
+    if (el.style.display === 'block') el.focus();
   }
 
   // Start on section 0
