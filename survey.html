@@ -58,7 +58,6 @@
 
     /* PROGRESS BAR */
     .progress-wrap {
-      height: 3px;
       background: var(--border);
       width: 100%;
     }
@@ -66,7 +65,39 @@
       height: 3px;
       background: var(--gold);
       width: 0%;
-      transition: width 0.3s ease;
+      transition: width 0.4s ease;
+    }
+    /* SECTION NAV */
+    .section-nav {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .section-nav::-webkit-scrollbar { display: none; }
+    .section-nav-item {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      padding: 10px 14px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .section-nav-item.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .section-nav-item.done {
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      .section-nav { padding: 0 12px; }
+      .section-nav-item { padding: 10px 10px; font-size: 10px; }
     }
 
     /* HERO */
@@ -336,7 +367,7 @@
     }
     #thank-you .ty-icon { font-size: 48px; margin-bottom: 20px; }
     #thank-you h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
-    #thank-you p { color: var(--muted); font-size: 15px; max-width: 400px; margin: 0 auto 24px; }
+    #thank-you p { color: var(--muted); font-size: 15px; max-width: 420px; margin: 0 auto 24px; }
     .ty-detail {
       display: inline-flex;
       align-items: center;
@@ -347,7 +378,62 @@
       border: 1px solid rgba(245,197,24,0.2);
       padding: 10px 20px;
       border-radius: 100px;
+      margin-bottom: 32px;
     }
+    .ty-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .ty-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      background: var(--gold);
+      color: #000;
+      transition: opacity 0.15s;
+    }
+    .ty-share:hover { opacity: 0.88; }
+    .ty-community {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .ty-community:hover { color: var(--text); }
+    .ty-teaser {
+      margin-top: 36px;
+      padding: 18px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* MILESTONE */
+    .milestone {
+      margin: 32px 0 0;
+      padding: 20px 24px;
+      background: rgba(245,197,24,0.04);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .milestone-icon { font-size: 22px; flex-shrink: 0; }
+    .milestone-text { font-size: 13px; color: #cccccc; line-height: 1.5; }
+    .milestone-text strong { color: var(--text); }
 
     /* DIVIDER */
     .q-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0 0; }
@@ -387,6 +473,15 @@
 <div class="progress-wrap">
   <div class="progress-bar" id="progress-bar"></div>
 </div>
+<div class="section-nav" id="section-nav">
+  <div class="section-nav-item active" data-section="0">About You</div>
+  <div class="section-nav-item" data-section="1">Adoption</div>
+  <div class="section-nav-item" data-section="2">Use Cases</div>
+  <div class="section-nav-item" data-section="3">Content Ops</div>
+  <div class="section-nav-item" data-section="4">Results</div>
+  <div class="section-nav-item" data-section="5">AI Visibility</div>
+  <div class="section-nav-item" data-section="6">Future Intent</div>
+</div>
 
 <!-- HERO -->
 <div class="survey-hero">
@@ -395,7 +490,7 @@
   <p>25 questions on how GTM teams are actually using AI in 2026 — and whether they have any strategy for how AI talks about them. Your answers shape a free benchmark report publishing June 2.</p>
   <div class="survey-meta">
     <div class="survey-meta-item"><span>25</span> questions</div>
-    <div class="survey-meta-item"><span>~5 min</span> to complete</div>
+    <div class="survey-meta-item"><span>~8 min</span> to complete</div>
     <div class="survey-meta-item"><span>Free</span> report access for all respondents</div>
     <div class="survey-meta-item">Closes <span>May 30, 2026</span></div>
   </div>
@@ -445,6 +540,10 @@
         <label class="option"><input type="radio" name="q3" value="11-25"> <span class="option-label">11–25 people</span></label>
         <label class="option"><input type="radio" name="q3" value="26-plus"> <span class="option-label">26+ people</span></label>
       </div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-icon">👀</div>
+      <div class="milestone-text"><strong>Quick start.</strong> Three questions in — already more useful data than most surveys collect in their entire run.</div>
     </div>
   </div>
 
@@ -533,6 +632,11 @@
       <div class="q-text">Which task has AI made the biggest difference for your team in the last 6 months?</div>
       <textarea name="q9" placeholder="Describe the task and what changed..."></textarea>
     </div>
+
+    <div class="milestone">
+      <div class="milestone-icon">🔥</div>
+      <div class="milestone-text"><strong>AI section done.</strong> The open-text answers from this part are going to be the most quoted thing in the full report. You're contributing to something genuinely new.</div>
+    </div>
   </div>
 
   <hr class="q-divider">
@@ -601,6 +705,11 @@
         <label class="option"><input type="radio" name="q14" value="dont-connect"> <span class="option-label">We don't connect them at all</span></label>
       </div>
     </div>
+
+    <div class="milestone">
+      <div class="milestone-icon">📊</div>
+      <div class="milestone-text"><strong>Halfway.</strong> The spend data from this section is the stat no other report publishes. You're helping set the benchmark.</div>
+    </div>
   </div>
 
   <hr class="q-divider">
@@ -668,6 +777,11 @@
       <div class="q-text">What do you wish AI could do for your GTM work that it can't do well today?</div>
       <textarea name="q19" placeholder="Be as specific as you like..."></textarea>
     </div>
+
+    <div class="milestone">
+      <div class="milestone-icon">✌️</div>
+      <div class="milestone-text"><strong>Four categories down, two to go.</strong> The hard questions are behind you. These last ones are the interesting ones — where things are headed.</div>
+    </div>
   </div>
 
   <hr class="q-divider">
@@ -711,6 +825,11 @@
         <label class="option"><input type="radio" name="q22" value="budget"> <span class="option-label">Budget</span></label>
         <label class="option"><input type="radio" name="q22" value="other"> <span class="option-label">Other</span></label>
       </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-icon">🏁</div>
+      <div class="milestone-text"><strong>Almost there.</strong> One category left — where you're headed. Takes about 90 seconds. Don't hold back.</div>
     </div>
   </div>
 
@@ -770,7 +889,7 @@
 
   <div class="submit-wrap">
     <button type="submit" class="btn-submit">Submit my answers &rarr;</button>
-    <p class="submit-note">Free. Takes about 5 minutes. Survey closes May 30, 2026.</p>
+    <p class="submit-note">Free. Takes about 8 minutes. Survey closes May 30, 2026.</p>
   </div>
 
 </form>
@@ -778,9 +897,14 @@
 <!-- THANK YOU -->
 <div id="thank-you">
   <div class="ty-icon">✦</div>
-  <h2>You're in.</h2>
-  <p>Thanks for contributing. You'll get early access to the State of AI-Led Growth report when it publishes June 2.</p>
-  <div class="ty-detail">Early report access confirmed for June 2, 2026</div>
+  <h2>You're part of the benchmark.</h2>
+  <p>Thanks for taking the time. You'll get early access to the full State of AI-Led Growth report when it publishes June 2 — before it goes public. We'll send it to the email you provided.</p>
+  <div class="ty-detail">📊 Report access confirmed · June 2, 2026</div>
+  <div class="ty-actions">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://danni-sys.github.io/state-of-ai-led-growth/" class="ty-share" target="_blank" rel="noopener">Share with someone who should weigh in &rarr;</a>
+    <a href="https://community.growthai.led" class="ty-community" target="_blank" rel="noopener">Join the AI-Led Growth community →</a>
+  </div>
+  <div class="ty-teaser">Early data is already surprising us. The report is going to be worth the wait.</div>
 </div>
 
 <!-- FOOTER -->
@@ -790,20 +914,45 @@
 </footer>
 
 <script>
-  // Progress bar based on scroll
-  window.addEventListener('scroll', () => {
+  // Section-based progress
+  const categories = document.querySelectorAll('.category');
+  const navItems = document.querySelectorAll('.section-nav-item');
+  const totalSections = categories.length;
+
+  function updateProgress() {
     const doc = document.documentElement;
-    const scrolled = doc.scrollTop;
-    const total = doc.scrollHeight - doc.clientHeight;
-    const pct = (scrolled / total) * 100;
+    const scrollMid = doc.scrollTop + window.innerHeight / 2;
+
+    let activeIdx = 0;
+    categories.forEach((cat, i) => {
+      if (cat.offsetTop <= scrollMid) activeIdx = i;
+    });
+
+    // Update section nav
+    navItems.forEach((item, i) => {
+      item.classList.remove('active', 'done');
+      if (i === activeIdx) item.classList.add('active');
+      else if (i < activeIdx) item.classList.add('done');
+    });
+
+    // Update gold progress bar — based on section progress
+    const pct = ((activeIdx) / (totalSections - 1)) * 100;
     document.getElementById('progress-bar').style.width = pct + '%';
-  });
+
+    // Scroll active nav item into view
+    navItems[activeIdx].scrollIntoView({ inline: 'center', behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 
   // Handle form submit
   function handleSubmit(e) {
     e.preventDefault();
+    document.getElementById('progress-bar').style.width = '100%';
     document.getElementById('survey-form').style.display = 'none';
     document.getElementById('thank-you').style.display = 'block';
+    document.getElementById('section-nav').style.display = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
