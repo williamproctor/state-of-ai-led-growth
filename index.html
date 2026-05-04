@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>State of AI-Led Growth 2026 | GrowthX Survey</title>
-  <meta name="description" content="How are GTM operators actually using AI in 2026? Take the ~8-minute survey and get early access to the benchmark report.">
+  <meta name="description" content="How are GTM operators actually using AI in 2026? Take the 5-minute survey and get early access to the benchmark report.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -303,7 +303,7 @@
     /* ABOUT GROWTHX */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 14px;
       margin-top: 32px;
     }
@@ -393,68 +393,6 @@
       line-height: 1.6;
     }
 
-
-    /* URGENCY BAR */
-    .urgency-bar {
-      background: #0d0d0d;
-      border-bottom: 1px solid var(--border);
-      padding: 14px 48px;
-    }
-    .urgency-inner {
-      max-width: 920px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .urgency-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex: 1;
-      min-width: 220px;
-    }
-    .urgency-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      white-space: nowrap;
-      letter-spacing: 0.02em;
-    }
-    .urgency-progress-wrap {
-      flex: 1;
-      height: 6px;
-      background: #222;
-      border-radius: 100px;
-      overflow: hidden;
-    }
-    .urgency-progress-fill {
-      height: 100%;
-      background: var(--gold);
-      border-radius: 100px;
-      transition: width 0.6s ease;
-      width: 0%;
-    }
-    .urgency-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .urgency-days {
-      font-weight: 800;
-      color: var(--gold);
-      font-size: 13px;
-    }
-    .urgency-close { color: var(--muted); }
-    @media (max-width: 768px) {
-      .urgency-bar { padding: 12px 20px; }
-      .urgency-inner { gap: 12px; }
-    }
-
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -487,7 +425,7 @@
 <div class="hero">
   <div class="hero-badge">2026 Benchmark Report &nbsp;·&nbsp; <span>Free</span></div>
   <h1>What are GTM operators<br><em>actually doing</em> with AI?</h1>
-  <p class="hero-thesis">AI adoption is high. But most teams still can't tell you if their growth strategy is working, where the budget is actually going, or whether AI is recommending them to buyers. We're surveying 500 GTM operators to map the full gap across marketing systems, strategy, and AI visibility, and publishing the findings for free.</p>
+  <p class="hero-thesis">AI adoption is high. But most teams still can't tell you if their growth strategy is working, where the budget is actually going, or whether AI is recommending them to buyers. We're surveying 500 GTM operators to map the full gap across marketing systems, strategy, and AI visibility — and publishing the findings for free.</p>
   <div class="hero-cta-group">
     <a href="survey.html" class="btn btn-primary">Take the Survey &rarr;</a>
     <a href="#what-you-get" class="btn btn-outline">What you get</a>
@@ -502,8 +440,8 @@
       <div class="stat-label">to complete</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">7</div>
-      <div class="stat-label">sections covered</div>
+      <div class="stat-num">500</div>
+      <div class="stat-label">practitioners surveyed</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">Free</div>
@@ -512,37 +450,89 @@
   </div>
 </div>
 
-<!-- URGENCY BAR -->
-<div class="urgency-bar">
-  <div class="urgency-inner">
-    <div class="urgency-left">
-      <span class="urgency-label">Collecting responses</span>
-      <div class="urgency-progress-wrap">
-        <div class="urgency-progress-fill" id="urgency-fill"></div>
+<hr class="divider">
+
+<!-- THE GAP -->
+<div class="section-alt">
+  <div class="section">
+    <div class="label">Why this matters</div>
+    <h2>Marketers are investing for the world as it was.<br>Expecting results from the world as it is.</h2>
+    <p>Most GTM teams can describe their AI tools. Far fewer can tell you what those tools cost, whether they're actually moving pipeline, or whether buyers can even find them through AI search. The gap between stated priorities and actual systems is what this survey is designed to expose.</p>
+    <div class="gap-grid">
+      <div class="gap-card">
+        <div class="gap-num gold">4+</div>
+        <h3>separate tools the average B2B team uses just to manage content and track performance</h3>
+        <p>Strategy in one place. Execution in another. Results somewhere else. Most teams manage content across 4+ tools and have no unified view of what's actually working.</p>
       </div>
-    </div>
-    <div class="urgency-right">
-      <span class="urgency-days" id="urgency-days"></span>
-      <span class="urgency-close">&middot; Closes May 30</span>
+      <div class="gap-card">
+        <div class="gap-num">73%</div>
+        <h3>of B2B buyers now use AI tools during vendor research</h3>
+        <p>ChatGPT, Perplexity, Gemini. They're asking AI who to shortlist before they ever visit your site. Most teams have no strategy for showing up in those answers.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num">~$30K</div>
+        <h3>estimated monthly spend on content, tools, and agencies for a typical Series A–B team</h3>
+        <p>Most can't give you an exact number. Tools, agencies, subscriptions, model APIs — the spend is scattered across vendors, teams, and credit cards. Nobody's tracking the total.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num gold">23%</div>
+        <h3>feel confident connecting content and organic spend to pipeline</h3>
+        <p>The other 77% are producing more content than ever and attributing almost none of it to revenue.</p>
+      </div>
     </div>
   </div>
 </div>
-<script>
-(function() {
-  var start = new Date('2026-04-27T00:00:00');
-  var end   = new Date('2026-05-30T23:59:59');
-  var now   = new Date();
-  var total   = (end - start) / 864e5;
-  var elapsed = Math.min(Math.max((now - start) / 864e5, 0), total);
-  var pct     = (elapsed / total * 100).toFixed(1);
-  var left    = Math.max(Math.ceil((end - now) / 864e5), 0);
-  var fill = document.getElementById('urgency-fill');
-  var label = document.getElementById('urgency-days');
-  if (fill)  fill.style.width = pct + '%';
-  if (label) label.textContent = left + (left === 1 ? ' day remaining' : ' days remaining');
-})();
-</script>
 
+<hr class="divider">
+
+<!-- THE HYPOTHESES -->
+<div class="section">
+  <div class="label">What the data is designed to reveal</div>
+  <h2>Three gaps we expect the data to surface.</h2>
+  <p>Most benchmark surveys ask what tools you use. This one is built around a single question: how big is the gap between how AI-forward teams think they are — and how AI-forward they actually are? These are the three hypotheses we're testing.</p>
+  <div class="hypothesis-grid">
+    <div class="hypothesis-card">
+      <div class="hypothesis-tag">The Adoption Gap</div>
+      <h3>Teams rate themselves a 7. The data will probably say 3.</h3>
+      <p>Most growth operators feel confident about their AI adoption. When you look at what they're actually using it for — and what they're not — the self-assessment rarely survives contact with the questions.</p>
+    </div>
+    <div class="hypothesis-card">
+      <div class="hypothesis-tag">The Budget Gap</div>
+      <h3>Content is the stated top priority. Budget says otherwise.</h3>
+      <p>Teams consistently list organic and content as their most important acquisition channel. We expect to find the actual monthly spend breakdown tells a very different story.</p>
+    </div>
+    <div class="hypothesis-card">
+      <div class="hypothesis-tag">The Cost Gap</div>
+      <h3>AI is "central to how we work." Most teams have no idea what it costs.</h3>
+      <p>Tools, APIs, and subscriptions have been rolled out across marketing teams everywhere. We think fewer than 1 in 4 growth leads can name their total monthly AI spend.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT YOU GET -->
+<div class="section" id="what-you-get">
+  <div class="label">What you get</div>
+  <h2>~8 minutes in.<br>A benchmark report back.</h2>
+  <p>Everyone who completes the survey gets early access to the full State of AI-Led Growth report. See exactly how your team compares to 500 GTM operators across AI adoption, budget allocation, content systems, and AI visibility — segmented by role, stage, and company size.</p>
+  <div class="perks">
+    <div class="perk">
+      <div class="perk-icon">📊</div>
+      <div class="perk-body">
+        <h3>The full benchmark report <span class="perk-tag">Everyone</span></h3>
+        <p>The complete State of AI-Led Growth findings — including all three gap analyses (Adoption, Budget, Cost) — sent to you when it publishes. Free, no paywall.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🎙️</div>
+      <div class="perk-body">
+        <h3>Optional: be quoted or referenced <span class="perk-tag">Opt in</span></h3>
+        <p>When you register, you can opt in to be quoted in the report, cited as a practitioner voice, or tapped as an advisor on this topic. Check the box if you want to be in the room where it happens.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <hr class="divider">
 
@@ -579,96 +569,11 @@
 
 <hr class="divider">
 
-<!-- THE GAP -->
-<div class="section-alt">
-  <div class="section">
-    <div class="label">Why this matters</div>
-    <h2>Marketers are investing for the world as it was.<br>Expecting results from the world as it is.</h2>
-    <p>Most GTM teams can describe their AI tools. Far fewer can tell you what those tools cost, whether they're actually moving pipeline, or whether buyers can even find them through AI search. The gap between stated priorities and actual systems is what this survey is designed to expose.</p>
-    <div class="gap-grid">
-      <div class="gap-card">
-        <div class="gap-num gold">4+</div>
-        <h3>separate tools the average B2B team uses just to manage content and track performance</h3>
-        <p>Strategy in one place. Execution in another. Results somewhere else. Most teams manage content across 4+ tools and have no unified view of what's actually working.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-num">73%</div>
-        <h3>of B2B buyers now use AI tools during vendor research</h3>
-        <p>ChatGPT, Perplexity, Gemini. They're asking AI who to shortlist before they ever visit your site. Most teams have no strategy for showing up in those answers.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-num">~$30K</div>
-        <h3>estimated monthly spend on content, tools, and agencies for a typical Series A–B team</h3>
-        <p>Most can't give you an exact number. Tools, agencies, subscriptions, model APIs. The spend is scattered across vendors, teams, and credit cards. Nobody's tracking the total.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-num gold">&lt;25%</div>
-        <h3>we expect will say they can connect content spend to pipeline</h3>
-        <p>Our hypothesis: fewer than 1 in 4 GTM teams will have clear attribution. The rest are producing more content than ever and attributing almost none of it to revenue.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- THE HYPOTHESES -->
-<div class="section">
-  <div class="label">What the data is designed to reveal</div>
-  <h2>Three gaps we expect the data to surface.</h2>
-  <p>Most benchmark surveys ask what tools you use. This one is built around a single question: how big is the gap between how AI-forward teams think they are, and how AI-forward they actually are? These are the three hypotheses we're testing.</p>
-  <div class="hypothesis-grid">
-    <div class="hypothesis-card">
-      <div class="hypothesis-tag">The Adoption Gap</div>
-      <h3>Teams rate themselves a 7. The data will probably say 3.</h3>
-      <p>Most growth operators feel confident about their AI adoption. When you look at what they're actually using it for, and what they're not, the self-assessment rarely survives contact with the questions.</p>
-    </div>
-    <div class="hypothesis-card">
-      <div class="hypothesis-tag">The Budget Gap</div>
-      <h3>Content is the stated top priority. Budget says otherwise.</h3>
-      <p>Teams consistently list organic and content as their most important acquisition channel. We expect to find the actual monthly spend breakdown tells a very different story.</p>
-    </div>
-    <div class="hypothesis-card">
-      <div class="hypothesis-tag">The Cost Gap</div>
-      <h3>AI is "central to how we work." Most teams have no idea what it costs.</h3>
-      <p>Tools, APIs, and subscriptions have been rolled out across marketing teams everywhere. We think fewer than 1 in 4 growth leads can name their total monthly AI spend.</p>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- WHAT YOU GET -->
-<div class="section" id="what-you-get">
-  <div class="label">What you get</div>
-  <h2>~8 minutes in.<br>A benchmark report back.</h2>
-  <p>Everyone who completes the survey gets early access to the full State of AI-Led Growth report. See exactly how your team compares to 500 GTM operators across AI adoption, budget allocation, content systems, and AI visibility, segmented by role, stage, and company size.</p>
-  <div class="perks">
-    <div class="perk">
-      <div class="perk-icon">📊</div>
-      <div class="perk-body">
-        <h3>The full benchmark report <span class="perk-tag">Everyone</span></h3>
-        <p>The complete State of AI-Led Growth findings, including all three gap analyses (Adoption, Budget, Cost), sent to you when it publishes. Free, no paywall.</p>
-      </div>
-    </div>
-    <div class="perk">
-      <div class="perk-icon">🎙️</div>
-      <div class="perk-body">
-        <h3>Optional: be quoted or referenced <span class="perk-tag">Opt in</span></h3>
-        <p>When you register, you can opt in to be quoted in the report, cited as a practitioner voice, or tapped as an advisor on this topic. Check the box if you want to be in the room where it happens.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<hr class="divider">
-
 <!-- HOW TO USE THE FINDINGS -->
 <div class="section">
   <div class="label">How to use the findings</div>
   <h2>Data you can actually do something with.</h2>
-  <p>This isn't a report you skim and close. The benchmark is designed to give you specific data points you can act on, and bring to the people who need convincing.</p>
+  <p>This isn't a report you skim and close. The benchmark is designed to give you specific data points you can act on — and bring to the people who need convincing.</p>
   <div class="gap-grid">
     <div class="gap-card">
       <div class="gap-num gold" style="font-size:2rem;">🔍</div>
@@ -682,13 +587,13 @@
     </div>
     <div class="gap-card">
       <div class="gap-num gold" style="font-size:2rem;">💡</div>
-      <h3>Identify where you're behind, and where you're ahead</h3>
-      <p>Segmented by company stage, team size, and role. Know exactly where you're ahead of the curve, where you're lagging, and what the teams doing it well are prioritizing.</p>
+      <h3>Identify where you're behind — and where you're ahead</h3>
+      <p>Filter findings by company stage, team size, and role. Know exactly where you're ahead of the curve, where you're lagging, and what the teams doing it well are prioritizing.</p>
     </div>
     <div class="gap-card">
       <div class="gap-num gold" style="font-size:2rem;">📣</div>
       <h3>Credibility for the AI visibility conversation</h3>
-      <p>When buyers are using AI to shortlist vendors, "we should probably look into this" doesn't cut it. Real benchmark data on how many teams are tracking, and how many aren't. It does.</p>
+      <p>When buyers are using AI to shortlist vendors, "we should probably look into this" doesn't cut it. Real benchmark data on how many teams are tracking — and how many aren't — does.</p>
     </div>
   </div>
 </div>
@@ -707,7 +612,7 @@
     </div>
     <div class="q-item">
       <span class="q-cat">AI Tools</span>
-      <span class="q-text">Does your team have visibility into how much you're spending on AI each month: tools, model APIs, and subscriptions combined?</span>
+      <span class="q-text">Does your team have visibility into how much you're spending on AI each month — tools, model APIs, and subscriptions combined?</span>
     </div>
     <div class="q-item">
       <span class="q-cat">Content Ops</span>
@@ -723,7 +628,7 @@
     </div>
     <div class="q-item">
       <span class="q-cat">Results</span>
-      <span class="q-text">Can you directly connect your content or organic spend to specific pipeline or revenue outcomes?</span>
+      <span class="q-text">How confident are you in connecting your content and organic efforts to pipeline or revenue?</span>
     </div>
   </div>
   <div class="q-more">21 more questions covering AI maturity, marketing systems, spend breakdowns, content strategy, barriers, and where teams are investing next.</div>
@@ -736,7 +641,7 @@
   <div class="section tight">
     <div class="label">About GrowthX</div>
     <h2>Built by practitioners, for practitioners.</h2>
-    <p>GrowthX runs AI-led growth programs for some of the fastest-growing B2B companies in the world. HubSpot is an investor. This survey is independent research, not a vendor report. The data from this survey directly shapes what we build next for growth teams. No agenda, just the benchmark.</p>
+    <p>GrowthX builds software and runs growth programs for some of the fastest-growing B2B companies in the world. HubSpot is an investor. This survey is independent research, not a vendor report. The data from this survey directly shapes what we build next for growth teams. No agenda, just the benchmark.</p>
     <div class="about-grid">
       <div class="about-stat">
         <div class="about-num">70+</div>
@@ -760,10 +665,9 @@
 <!-- FINAL CTA -->
 <div class="cta-block" id="survey">
   <div class="label" style="text-align:center;">Take the survey</div>
-  <h2>Find out exactly where your team stands.<br>Before the report makes the rounds.</h2>
-  <p>~8 minutes. Free. Every answer you give makes the data sharper, and the report more useful to the whole GTM community.</p>
+  <h2>Find out where you actually stand.<br>Help everyone else do the same.</h2>
+  <p>~8 minutes. Free. Every answer you give makes the data sharper — and the report more useful to the whole GTM community.</p>
   <a href="survey.html" class="btn btn-primary" style="font-size:16px; padding:14px 32px;">Take the Survey &rarr;</a>
-  <p style="font-size:12px; color:#555; margin-bottom:24px; margin-top:-16px;">Your email is used to send you the report. One email. Nothing else. No spam, no sales sequence.</p>
   <div class="cta-details">
     <div class="cta-detail"><span>✓</span> 27 questions, ~8 minutes</div>
     <div class="cta-detail"><span>✓</span> Free early report access</div>
