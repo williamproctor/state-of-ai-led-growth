@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>State of AI-Led Growth 2026 | GrowthX Survey</title>
-  <meta name="description" content="How are GTM operators actually using AI in 2026? Take the 5-minute survey and get early access to the benchmark report.">
+  <meta name="description" content="How are GTM operators actually using AI in 2026? Take the ~8-minute survey and get early access to the benchmark report.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -303,7 +303,7 @@
     /* ABOUT GROWTHX */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 14px;
       margin-top: 32px;
     }
@@ -393,6 +393,68 @@
       line-height: 1.6;
     }
 
+
+    /* URGENCY BAR */
+    .urgency-bar {
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 48px;
+    }
+    .urgency-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .urgency-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 220px;
+    }
+    .urgency-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    .urgency-progress-wrap {
+      flex: 1;
+      height: 6px;
+      background: #222;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .urgency-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 100px;
+      transition: width 0.6s ease;
+      width: 0%;
+    }
+    .urgency-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .urgency-days {
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 13px;
+    }
+    .urgency-close { color: var(--muted); }
+    @media (max-width: 768px) {
+      .urgency-bar { padding: 12px 20px; }
+      .urgency-inner { gap: 12px; }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -440,12 +502,77 @@
       <div class="stat-label">to complete</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">500</div>
-      <div class="stat-label">practitioners surveyed</div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">sections covered</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">Free</div>
       <div class="stat-label">full report access</div>
+    </div>
+  </div>
+</div>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  <div class="urgency-inner">
+    <div class="urgency-left">
+      <span class="urgency-label">Collecting responses</span>
+      <div class="urgency-progress-wrap">
+        <div class="urgency-progress-fill" id="urgency-fill"></div>
+      </div>
+    </div>
+    <div class="urgency-right">
+      <span class="urgency-days" id="urgency-days"></span>
+      <span class="urgency-close">&middot; Closes May 30</span>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var start = new Date('2026-04-27T00:00:00');
+  var end   = new Date('2026-05-30T23:59:59');
+  var now   = new Date();
+  var total   = (end - start) / 864e5;
+  var elapsed = Math.min(Math.max((now - start) / 864e5, 0), total);
+  var pct     = (elapsed / total * 100).toFixed(1);
+  var left    = Math.max(Math.ceil((end - now) / 864e5), 0);
+  var fill = document.getElementById('urgency-fill');
+  var label = document.getElementById('urgency-days');
+  if (fill)  fill.style.width = pct + '%';
+  if (label) label.textContent = left + (left === 1 ? ' day remaining' : ' days remaining');
+})();
+</script>
+
+
+<hr class="divider">
+
+<!-- WHO IT'S FOR -->
+<div class="section-alt">
+  <div class="section tight">
+    <div class="label">Who it's for</div>
+    <h2>Built for the people who own pipeline.</h2>
+    <p>This isn't a survey for "marketers" broadly. It's for the operators and growth leads who are actually running AI in their GTM motion every day.</p>
+    <div class="personas">
+      <div class="persona">
+        <div class="persona-icon">🎯</div>
+        <h3>VP / Director of Marketing</h3>
+        <p>Own pipeline. Accountable for AI ROI. Need the benchmark.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">📈</div>
+        <h3>Head of Growth</h3>
+        <p>Running experiments. Scaling what works. Want to know what peers are doing.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">🚀</div>
+        <h3>Founder / CEO</h3>
+        <p>Doing it yourself at Seed or Series A. Want signal, not fluff.</p>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">⚙️</div>
+        <h3>Marketing Ops / RevOps</h3>
+        <p>Building the stack. Measuring what actually matters.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -475,9 +602,9 @@
         <p>Most can't give you an exact number. Tools, agencies, subscriptions, model APIs — the spend is scattered across vendors, teams, and credit cards. Nobody's tracking the total.</p>
       </div>
       <div class="gap-card">
-        <div class="gap-num gold">23%</div>
-        <h3>feel confident connecting content and organic spend to pipeline</h3>
-        <p>The other 77% are producing more content than ever and attributing almost none of it to revenue.</p>
+        <div class="gap-num gold">&lt;25%</div>
+        <h3>we expect will say they can connect content spend to pipeline</h3>
+        <p>Our hypothesis: fewer than 1 in 4 GTM teams will have clear attribution. The rest are producing more content than ever and attributing almost none of it to revenue.</p>
       </div>
     </div>
   </div>
@@ -534,38 +661,6 @@
   </div>
 </div>
 
-<hr class="divider">
-
-<!-- WHO IT'S FOR -->
-<div class="section-alt">
-  <div class="section tight">
-    <div class="label">Who it's for</div>
-    <h2>Built for the people who own pipeline.</h2>
-    <p>This isn't a survey for "marketers" broadly. It's for the operators and growth leads who are actually running AI in their GTM motion every day.</p>
-    <div class="personas">
-      <div class="persona">
-        <div class="persona-icon">🎯</div>
-        <h3>VP / Director of Marketing</h3>
-        <p>Own pipeline. Accountable for AI ROI. Need the benchmark.</p>
-      </div>
-      <div class="persona">
-        <div class="persona-icon">📈</div>
-        <h3>Head of Growth</h3>
-        <p>Running experiments. Scaling what works. Want to know what peers are doing.</p>
-      </div>
-      <div class="persona">
-        <div class="persona-icon">🚀</div>
-        <h3>Founder / CEO</h3>
-        <p>Doing it yourself at Seed or Series A. Want signal, not fluff.</p>
-      </div>
-      <div class="persona">
-        <div class="persona-icon">⚙️</div>
-        <h3>Marketing Ops / RevOps</h3>
-        <p>Building the stack. Measuring what actually matters.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <hr class="divider">
 
@@ -588,7 +683,7 @@
     <div class="gap-card">
       <div class="gap-num gold" style="font-size:2rem;">💡</div>
       <h3>Identify where you're behind — and where you're ahead</h3>
-      <p>Filter findings by company stage, team size, and role. Know exactly where you're ahead of the curve, where you're lagging, and what the teams doing it well are prioritizing.</p>
+      <p>Segmented by company stage, team size, and role. Know exactly where you're ahead of the curve, where you're lagging, and what the teams doing it well are prioritizing.</p>
     </div>
     <div class="gap-card">
       <div class="gap-num gold" style="font-size:2rem;">📣</div>
@@ -628,7 +723,7 @@
     </div>
     <div class="q-item">
       <span class="q-cat">Results</span>
-      <span class="q-text">How confident are you in connecting your content and organic efforts to pipeline or revenue?</span>
+      <span class="q-text">Can you directly connect your content or organic spend to specific pipeline or revenue outcomes?</span>
     </div>
   </div>
   <div class="q-more">21 more questions covering AI maturity, marketing systems, spend breakdowns, content strategy, barriers, and where teams are investing next.</div>
@@ -665,9 +760,10 @@
 <!-- FINAL CTA -->
 <div class="cta-block" id="survey">
   <div class="label" style="text-align:center;">Take the survey</div>
-  <h2>Find out where you actually stand.<br>Help everyone else do the same.</h2>
+  <h2>Find out exactly where your team stands.<br>Before the report makes the rounds.</h2>
   <p>~8 minutes. Free. Every answer you give makes the data sharper — and the report more useful to the whole GTM community.</p>
   <a href="survey.html" class="btn btn-primary" style="font-size:16px; padding:14px 32px;">Take the Survey &rarr;</a>
+  <p style="font-size:12px; color:#555; margin-bottom:24px; margin-top:-16px;">Your email is used to send you the report. One email. Nothing else. No spam, no sales sequence.</p>
   <div class="cta-details">
     <div class="cta-detail"><span>✓</span> 27 questions, ~8 minutes</div>
     <div class="cta-detail"><span>✓</span> Free early report access</div>
