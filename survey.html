@@ -332,6 +332,27 @@
 
     /* SUBMIT */
     .submit-wrap { margin-top: 24px; }
+    .submit-header {
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+    .submit-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+    .submit-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .submit-body {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto;
+    }
     .btn-submit {
       display: inline-flex;
       align-items: center;
@@ -1095,8 +1116,14 @@
   </div>
 
   <div class="submit-wrap">
+    <div class="submit-header">
+      <div class="submit-icon">✦</div>
+      <h2 class="submit-title">One last thing.</h2>
+      <p class="submit-body">That's all 27 questions. Hit submit and your answers go straight into the benchmark. You'll get the full report sent to the email you provided when it publishes.</p>
+      <p class="submit-body" style="margin-top:8px; opacity:0.7; font-size:0.9rem;">Your answers are anonymous unless you opted in to be quoted.</p>
+    </div>
     <button type="submit" class="btn-submit">Submit my answers &rarr;</button>
-    <p class="submit-note">Free. Takes about 8 minutes.</p>
+    <p class="submit-note">Free. Takes about 8 minutes total.</p>
   </div>
 
 </form>
