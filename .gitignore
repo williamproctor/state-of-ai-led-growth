@@ -1,0 +1,20 @@
+# env
+.env
+.env.local
+.env.*.local
+
+# vercel
+.vercel
+
+# node
+node_modules
+npm-debug.log*
+
+# os
+.DS_Store
+Thumbs.db
+
+# editor
+.idea
+.vscode
+*.swp

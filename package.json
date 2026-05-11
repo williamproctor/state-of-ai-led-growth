@@ -1,0 +1,10 @@
+{
+  "name": "state-of-ai-led-growth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "State of AI-Led Growth 2026 — survey site + serverless backend",
+  "engines": {
+    "node": ">=20"
+  }
+}

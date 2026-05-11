@@ -649,7 +649,12 @@
 </div>
 
 <!-- FORM -->
-<form class="form-wrap" id="survey-form" onsubmit="handleSubmit(event)">
+<form class="form-wrap" id="survey-form" onsubmit="handleSubmit(event)" novalidate>
+
+  <!-- Honeypot: hidden from users via CSS + tabindex + autocomplete; bots fill it. -->
+  <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+    <label>Website (leave blank)<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+  </div>
 
 
   <!-- DEMOGRAPHICS -->
@@ -682,8 +687,8 @@
         </div>
       </div>
       <label class="optin-label">
-        <input type="checkbox" name="optin" value="yes" checked>
-        <span>I'd like to receive the full report and occasional updates from GrowthX when it publishes.</span>
+        <input type="checkbox" name="optin" value="yes">
+        <span>Send me the full State of AI-Led Growth report when it publishes, plus occasional related research from GrowthX.</span>
       </label>
       <label class="optin-label">
         <input type="checkbox" name="advisor_optin" value="yes">
@@ -1122,7 +1127,8 @@
       <p class="submit-body">That's all 27 questions. Hit submit and your answers go straight into the benchmark. You'll get the full report sent to the email you provided when it publishes.</p>
       <p class="submit-body" style="margin-top:8px; opacity:0.7; font-size:0.9rem;">Your answers are anonymous unless you opted in to be quoted.</p>
     </div>
-    <button type="submit" class="btn-submit">Submit my answers &rarr;</button>
+    <div id="submit-error" role="alert" style="display:none;margin:0 0 16px;padding:12px 16px;border-radius:8px;background:#3a1f1f;color:#ffb4b4;font-size:0.95rem;border:1px solid #5a2a2a;"></div>
+    <button type="submit" class="btn-submit" id="btn-submit">Submit my answers &rarr;</button>
     <p class="submit-note">Free. Takes about 8 minutes total.</p>
   </div>
 
@@ -1256,13 +1262,76 @@
     if (currentSection > 0) showSection(currentSection - 1);
   }
 
-  function handleSubmit(e) {
+  // Capture UTM + referrer once on page load so we have them at submit time.
+  const __utm = (function() {
+    const out = {};
+    try {
+      const params = new URLSearchParams(window.location.search);
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k) {
+        const v = params.get(k);
+        if (v) out[k] = v;
+      });
+    } catch (e) { /* noop */ }
+    return out;
+  })();
+  const __referrer = (function() {
+    try { return document.referrer || ''; } catch (e) { return ''; }
+  })();
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    progressBar.style.width = '100%';
-    surveyForm.style.display  = 'none';
-    sectionNav.style.display  = 'none';
-    thankYou.style.display    = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const submitBtn  = document.getElementById('btn-submit');
+    const errorBox   = document.getElementById('submit-error');
+    errorBox.style.display = 'none';
+    errorBox.textContent   = '';
+    submitBtn.disabled     = true;
+    const originalLabel    = submitBtn.textContent;
+    submitBtn.textContent  = 'Submitting…';
+
+    // Serialize the form. Multiple values for the same name (checkbox groups)
+    // are collected as an array.
+    const fd      = new FormData(surveyForm);
+    const payload = {};
+    for (const [key, value] of fd.entries()) {
+      if (key in payload) {
+        payload[key] = Array.isArray(payload[key]) ? payload[key].concat(value) : [payload[key], value];
+      } else {
+        payload[key] = value;
+      }
+    }
+    Object.assign(payload, __utm);
+    payload.referrer     = __referrer;
+    payload.submitted_at = new Date().toISOString();
+
+    try {
+      const resp = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!resp.ok) {
+        let msg = 'Something went wrong saving your response. Please try again.';
+        try {
+          const data = await resp.json();
+          if (data && data.error) msg = data.error;
+        } catch (_) { /* fall back to default msg */ }
+        throw new Error(msg);
+      }
+
+      progressBar.style.width  = '100%';
+      surveyForm.style.display = 'none';
+      sectionNav.style.display = 'none';
+      thankYou.style.display   = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      errorBox.textContent   = (err && err.message) || 'Something went wrong. Please try again.';
+      errorBox.style.display = 'block';
+      submitBtn.disabled     = false;
+      submitBtn.textContent  = originalLabel;
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   // Show/hide "Other" text inputs
